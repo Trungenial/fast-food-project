@@ -1,0 +1,364 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+}
+
+/* Sidebar mặc định ẩn */
+.dashboard-sidebar {
+    width: 0;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    height: 100vh;
+    position: fixed;
+    padding-top: 0;
+    overflow: hidden;
+    transition: width 0.3s, padding 0.3s;
+}
+
+.brand-logo {
+    width: 150px;
+    height: auto;
+    display: block;
+    margin-top: -10px;
+    transform: translateX(20px);
+}
+
+.sidebar-open .dashboard-sidebar {
+    width: 250px;
+    padding-top: 20px;
+    overflow-y: auto;
+}
+
+.dashboard-content {
+    margin-left: 0;
+    width: 100%;
+    transition: margin-left 0.3s, width 0.3s;
+}
+
+.sidebar-open .dashboard-content {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+}
+
+.dashboard-toolbar,
+.toolbar-top {
+    left: 0;
+    transition: left 0.3s;
+}
+
+.sidebar-open .dashboard-toolbar,
+.sidebar-open .toolbar-top {
+    left: 250px;
+}
+
+.dashboard-sidebar a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+}
+
+.dashboard-sidebar a:hover {
+    background-color: #57536e;
+}
+
+.dashboard-nav-dropdown-item {
+    color: yellow !important;
+    /* Màu chữ vàng */
+    font-weight: bold;
+    /* Đậm chữ cho nổi bật */
+    text-decoration: none;
+    /* Loại bỏ gạch chân */
+    display: block;
+    padding: 8px 15px;
+}
+
+.dashboard-nav-dropdown-item:hover {
+    color: #ffcc00;
+    /* Màu vàng sáng hơn khi hover */
+    background-color: rgba(255, 255, 0, 0.2);
+    /* Nền nhạt khi hover */
+}
+
+.toolbar-top {
+    height: 40px;
+    background-color: #ffeb3b;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 20px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+    transition: left 0.3s;
+}
+
+.toolbar-top .logo-container {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+    margin-top: -10px;
+}
+
+.toolbar-top .logo {
+    height: 40px;
+    width: auto;
+}
+
+.toolbar-top .decor-left,
+.toolbar-top .decor-right {
+    font-size: 25px;
+    color: #e31837;
+}
+
+.dashboard-toolbar {
+    height: 50px;
+    background-color: rgb(241, 37, 37);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 20px;
+    position: fixed;
+    top: 40px;
+    right: 0;
+    z-index: 1000;
+    transition: left 0.3s;
+}
+
+.dashboard-main {
+    margin-top: 84px;
+    padding: 20px;
+    background-color: #f5f5f5;
+    min-height: 100vh;
+}
+
+.dashboard-nav-dropdown-menu {
+    display: none;
+    padding-left: 20px;
+}
+
+.dashboard-nav-dropdown.open .dashboard-nav-dropdown-menu {
+    display: block;
+}
+
+.menu-toggle {
+    cursor: pointer;
+    font-size: 24px;
+    margin-right: 20px;
+}
+
+.toolbar-menu {
+    display: flex;
+    gap: 20px;
+}
+
+.toolbar-menu a {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    border: 2px solid #fefefe;
+    background-color: white;
+    box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: all 0.5s ease;
+    text-decoration: none;
+    font-weight: 600;
+    color: black;
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 20px;
+}
+
+.toolbar-menu a:hover {
+    letter-spacing: 3px;
+    background-color: red;
+    color: white;
+    box-shadow: rgb(220 24 24) 0px 7px 29px 0px;
+}
+
+.toolbar-menu a:focus,
+.toolbar-menu a:active {
+    letter-spacing: 3px;
+    background-color: yellow;
+    color: rgb(0, 0, 0);
+    box-shadow: rgb(255 193 7) 0px 0px 0px 0px;
+    transform: translateY(10px);
+    transition: 100ms;
+}
+.toolbar-menu a.active {
+    background-color: yellow !important;
+    color: rgb(0, 0, 0) !important;
+    box-shadow: rgb(255 193 7) 0px 0px 0px 0px;
+    transform: translateY(10px);
+    transition: 100ms;
+}
+
+
+
+.toolbar-right {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.icon-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.icon-button i {
+    font-size: 20px;
+    color: white;
+}
+
+.dashboard-footer {
+    background-color: #d71718;
+    color: white;
+    padding: 40px 20px;
+    font-size: 14px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-left,
+.footer-middle,
+.footer-right {
+    width: 30%;
+}
+
+.footer-logo {
+    max-width: 100px;
+    margin-bottom: 10px;
+}
+
+.hotline {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffeb3b;
+    display: flex;
+    align-items: center;
+}
+
+.hotline i {
+    margin-right: 10px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 5px;
+}
+
+ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+ul li a:hover {
+    text-decoration: underline;
+}
+
+.social-icons a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+
+.social-icons a i {
+    margin-right: 10px;
+}
+
+.gov-logo {
+    max-width: 120px;
+    margin-top: 10px;
+}
+
+.app-links img {
+    max-width: 120px;
+    margin-right: 10px;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.store-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.store-buttons img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+}
+
+.footer {
+    background-color: #d91a21;
+    color: white;
+    padding: 20px 0;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.footer-column {
+    width: 30%;
+    padding: 10px;
+}
+
+.footer-column h3 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 8px;
+}
+
+.footer-column img {
+    width: 150px;
+}
+
+.footer-social {
+    text-align: center;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+}
