@@ -6,3 +6,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/home','App\Http\Controllers\HomeControllers@home');
+Route::get('/contact','App\Http\Controllers\ContactControllers@home');

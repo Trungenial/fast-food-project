@@ -74,7 +74,7 @@
                     <a href="{{ url('/khuyen-mai') }}" class="{{ request()->is('khuyen-mai') ? 'active' : '' }}"><span>KHUYẾN MÃI</span></a>
                     <a href="{{ url('/dich-vu-tiec') }}" class="{{ request()->is('dich-vu-tiec') ? 'active' : '' }}"><span>DỊCH VỤ TIỆC</span></a>
                     <a href="{{ url('/nha-hang') }}" class="{{ request()->is('nha-hang') ? 'active' : '' }}"><span>HỆ THỐNG NHÀ HÀNG</span></a>
-                    <a href="{{ url('/lien-he') }}" class="{{ request()->is('lien-he') ? 'active' : '' }}"><span>LIÊN HỆ</span></a>
+                    <a href="{{ url('/contact') }}" class="{{ request()->is('contact') ? 'active' : '' }}"><span>LIÊN HỆ</span></a>
                     <a href="{{ url('/tuyen-dung') }}" class="{{ request()->is('tuyen-dung') ? 'active' : '' }}"><span>TUYỂN DỤNG</span></a>
 
 
@@ -88,6 +88,7 @@
         </div>
         <div class="dashboard-main">
             @yield('content')
+            @yield('css')
         </div>
         <footer class="dashboard-footer">
             <div class="footer-container">
@@ -105,7 +106,7 @@
                     <p><strong>GIAO HÀNG TẬN NƠI</strong></p>
                     <p class="hotline"><i class="fas fa-phone"></i> 1900-1533</p>
                     <ul>
-                        <li><a href="#">Liên hệ</a></li>
+                        <li><a href="{{ url('/contact') }}" class="{{ request()->is('contact') ? 'active' : '' }}">Liên hệ</a></li>
                         <li><a href="#">Chính sách & quy định chung</a></li>
                         <li><a href="#">Chính sách thanh toán</a></li>
                         <li><a href="#">Chính sách hoạt động</a></li>
