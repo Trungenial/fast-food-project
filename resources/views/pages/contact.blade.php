@@ -1,13 +1,23 @@
 @extends('layouts.main')
 
-@section('title', 'Contact us')
+@section('title', 'Liên hệ với chúng tôi')
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/contact.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 @endsection
 
 @section('content')
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+@if(session('success'))
+    <div class="alert alert-success" id="success-message">
+        <span class="close-btn" onclick="this.parentElement.style.display='none'">&times;</span>
+        {{ session('success') }}
+    </div>
+@endif
+
 <div class="container py-5">
     <h1>LIÊN HỆ JOLLIBEE</h1>
     <div class="content">
@@ -19,14 +29,17 @@
                 <li><span class="dot"></span> Tầng 26, Tòa nhà CII Tower, số 152 Điện Biên Phủ, Phường 25, Quận Bình Thạnh, Thành phố Hồ Chí Minh, Việt Nam</li>
             </ul>
             <h2>Gửi tin nhắn cho chúng tôi</h2>
-            <form>
+            <form action="{{ url('/contact') }}" method="POST">
+                @csrf
                 <label for="name">Tên *</label>
                 <input type="text" id="name" name="name" required>
+                <label for="phone">SĐT *</label>
+                <input type="number" id="phone" name="phone" required>
                 <label for="email">Email *</label>
                 <input type="email" id="email" name="email" required>
                 <label for="message">Thông điệp *</label>
                 <textarea id="message" name="message" required></textarea>
-                <button>
+                <button type="submit">
                     <div class="svg-wrapper-1">
                         <div class="svg-wrapper">
                             <svg
@@ -43,7 +56,6 @@
                     </div>
                     <span>Gửi</span>
                 </button>
-
             </form>
         </div>
         <div class="map-section">
@@ -54,4 +66,15 @@
         </div>
     </div>
 </div>
+@endsection
+@section('js')
+<script>
+    setTimeout(() => {
+        let msg = document.getElementById('success-message');
+        if (msg) {
+            msg.classList.add('fade-out'); /* Thêm class để tạo hiệu ứng fade-out */
+            setTimeout(() => msg.style.display = "none", 500); /* Ẩn sau khi fade-out hoàn tất */
+        }
+    }, 2000); // Tắt sau 2 giây
+</script>
 @endsection
