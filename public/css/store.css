@@ -1,0 +1,131 @@
+/* Tổng thể trang */
+.container {
+    width: 70%;
+    margin: auto;
+    padding: 20px;
+    background: #000000;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Tiêu đề */
+.title {
+    font-weight: bold;
+    font-size: 28px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    color: #ffff00;
+}
+
+/* Bố cục chính */
+.main-layout {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* Danh sách cửa hàng */
+.store-list {
+    width: 45%;
+}
+
+.store-card {
+    position: relative;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    background: #fff;
+    min-height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    border-left: 5px solid #dc3545; /* Viền đỏ bên trái */
+}
+.store-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+/* Điều chỉnh kích thước và vị trí logo */
+.logo-img {
+    width: 60px; /* Điều chỉnh kích thước */
+    height: auto;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #dc3545;
+}
+
+
+.card-text {
+    font-size: 14px;
+}
+
+/* Nút xem bản đồ */
+.btn-map {
+    background-color: #dc3545;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    transition: background 0.3s ease-in-out;
+}
+
+.btn-map:hover {
+    background-color: #bb2d3b;
+}
+
+/* Khu vực bản đồ */
+.map-container {
+    width: 50%;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.map-frame {
+    width: 100%;
+    height: 500px;
+    border: none;
+    border-radius: 10px;
+}
+
+/* Responsive */
+@media screen and (max-width: 992px) {
+    .main-layout {
+        flex-direction: column;
+    }
+    .store-list, .map-container {
+        width: 100%;
+    }
+}
+/* Thêm thanh cuộn cho danh sách cửa hàng */
+.store-list {
+    width: 45%;
+    max-height: 500px;  /* Giới hạn chiều cao */
+    overflow-y: auto;   /* Bật thanh cuộn dọc */
+    padding-right: 10px;
+}
+
+/* Tuỳ chỉnh scrollbar */
+.store-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.store-list::-webkit-scrollbar-thumb {
+    background-color: #dc3545; /* Màu đỏ Jollibee */
+    border-radius: 5px;
+}
+
+.store-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
