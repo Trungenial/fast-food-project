@@ -73,7 +73,7 @@
                     <a href="{{ url('/thuc-don') }}" class="{{ request()->is('thuc-don') ? 'active' : '' }}"><span>THỰC ĐƠN</span></a>
                     <a href="{{ url('/khuyen-mai') }}" class="{{ request()->is('khuyen-mai') ? 'active' : '' }}"><span>KHUYẾN MÃI</span></a>
                     <a href="{{ url('/dich-vu-tiec') }}" class="{{ request()->is('dich-vu-tiec') ? 'active' : '' }}"><span>DỊCH VỤ TIỆC</span></a>
-                    <a href="{{ url('/nha-hang') }}" class="{{ request()->is('nha-hang') ? 'active' : '' }}"><span>HỆ THỐNG NHÀ HÀNG</span></a>
+                    <a href="{{ url('/store') }}" class="{{ request()->is('store') ? 'active' : '' }}"><span>HỆ THỐNG NHÀ HÀNG</span></a>
                     <a href="{{ url('/contact') }}" class="{{ request()->is('contact') ? 'active' : '' }}"><span>LIÊN HỆ</span></a>
                     <a href="{{ url('/tuyen-dung') }}" class="{{ request()->is('tuyen-dung') ? 'active' : '' }}"><span>TUYỂN DỤNG</span></a>
 

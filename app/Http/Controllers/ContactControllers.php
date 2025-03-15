@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class ContactControllers extends Controller
 {
-    function home() {
+    function contact() {
         return view("pages.contact");
     }
 }
