@@ -13,9 +13,9 @@
                 <label class="form-label fw-bold">📂 Thể loại sản phẩm:</label>
                 <select name="category_id" class="form-select" required>
                     @foreach ($categories as $category)
-                        <option value="{{ $category->id }}" {{ $category->id == $product->category_id ? 'selected' : '' }}>
-                            {{ $category->name }}
-                        </option>
+                    <option value="{{ $category->id }}" {{ $category->id == $product->category_id ? 'selected' : '' }}>
+                        {{ $category->name }}
+                    </option>
                     @endforeach
                 </select>
             </div>
@@ -39,7 +39,7 @@
                 <label class="form-label fw-bold">🖼️ Ảnh sản phẩm:</label>
                 <input type="file" name="image" class="form-control">
                 <div class="mt-2">
-                    <img src="{{ asset('storage/' . $product->image) }}" width="80">
+                    <img src="{{ asset('storage/items' . $product->image) }}" width="80">
                 </div>
             </div>
 

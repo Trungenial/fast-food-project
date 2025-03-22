@@ -10,6 +10,8 @@
 
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="{{ asset('css/main_style.css') }}">
     <script src="{{ asset('js/script.js') }}"></script>
 
@@ -70,14 +72,15 @@
             <div class="toolbar-left">
                 <div class="toolbar-menu">
                     <a href="{{ url('/home') }}" class="{{ request()->is('home') ? 'active' : '' }}"><span>TRANG CHỦ</span></a>
-                    <a href="{{ url('/thuc-don') }}" class="{{ request()->is('thuc-don') ? 'active' : '' }}"><span>THỰC ĐƠN</span></a>
+                    <a href="{{ url('/menu') }}"
+                        class="nav-link {{ request()->is('menu') || request()->is('menu/category/*') ? 'active' : '' }}">
+                        THỰC ĐƠN
+                    </a>
                     <a href="{{ url('/khuyen-mai') }}" class="{{ request()->is('khuyen-mai') ? 'active' : '' }}"><span>KHUYẾN MÃI</span></a>
                     <a href="{{ url('/dich-vu-tiec') }}" class="{{ request()->is('dich-vu-tiec') ? 'active' : '' }}"><span>DỊCH VỤ TIỆC</span></a>
                     <a href="{{ url('/store') }}" class="{{ request()->is('store') ? 'active' : '' }}"><span>HỆ THỐNG NHÀ HÀNG</span></a>
                     <a href="{{ url('/contact') }}" class="{{ request()->is('contact') ? 'active' : '' }}"><span>LIÊN HỆ</span></a>
                     <a href="{{ url('/tuyen-dung') }}" class="{{ request()->is('tuyen-dung') ? 'active' : '' }}"><span>TUYỂN DỤNG</span></a>
-
-
                 </div>
             </div>
             <div class="toolbar-right">
@@ -107,13 +110,13 @@
                     <p class="hotline"><i class="fas fa-phone"></i> 1900-1533</p>
                     <ul>
                         <li><a href="{{ url('/contact') }}" class="{{ request()->is('contact') ? 'active' : '' }}">Liên hệ</a></li>
-                        <li><a href="#">Chính sách & quy định chung</a></li>
-                        <li><a href="#">Chính sách thanh toán</a></li>
-                        <li><a href="#">Chính sách hoạt động</a></li>
-                        <li><a href="#">Chính sách bảo mật</a></li>
-                        <li><a href="#">Vận chuyển & giao nhận</a></li>
-                        <li><a href="#">Thông tin đăng ký giao dịch</a></li>
-                        <li><a href="#">Hướng dẫn đặt hàng</a></li>
+                        <li><a href="{{ route('footer.show', 'chinh-sach-quy-dinh-chung') }}">Chính sách & quy định chung</a></li>
+                        <li><a href="{{ route('footer.show', 'chinh-sach-thanh-toan') }}">Chính sách thanh toán</a></li>
+                        <li><a href="{{ route('footer.show', 'chinh-sach-hoat-dong') }}">Chính sách hoạt động</a></li>
+                        <li><a href="{{ route('footer.show', 'chinh-sach-bao-mat') }}">Chính sách bảo mật</a></li>
+                        <li><a href="{{ route('footer.show', 'van-chuyen-giao-nhan') }}">Vận chuyển & giao nhận</a></li>
+                        <li><a href="{{ route('footer.show', 'thong-tin-dang-ky-giao-dich') }}">Thông tin đăng ký giao dịch</a></li>
+                        <li><a href="{{ route('footer.show', 'huong-dan-dat-hang') }}">Hướng dẫn đặt hàng</a></li>
                     </ul>
                 </div>
                 <div class="footer-right">
