@@ -32,7 +32,7 @@
                     <td><span class="text-success fw-bold">{{ number_format($product->price, 0) }} đ</span></td>
                     <td><span class="badge bg-primary">{{ $product->category->name }}</span></td>
                     <td>
-                        <img src="{{ asset('storage/' . $product->image) }}" width="60" class="rounded border shadow-sm">
+                        <img src="{{ asset('storage/items/' . $product->image) }}" width="60" class="rounded border shadow-sm">
                     </td>
                     <td>
                         <a href="{{ route('products.edit', $product->id) }}" class="btn btn-sm btn-warning">

@@ -39,7 +39,7 @@
                 <label class="form-label fw-bold">🖼️ Ảnh sản phẩm:</label>
                 <input type="file" name="image" class="form-control">
                 <div class="mt-2">
-                    <img src="{{ asset('storage/' . $product->image) }}" width="80">
+                    <img src="{{ asset('storage/items' . $product->image) }}" width="80">
                 </div>
             </div>
 
