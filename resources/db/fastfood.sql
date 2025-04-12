@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 14, 2025 at 08:08 AM
+-- Generation Time: Mar 15, 2025 at 05:37 PM
 -- Server version: 9.1.0
 -- PHP Version: 8.3.14
 
@@ -62,6 +62,23 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `parent_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `parent_id` (`parent_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer_messages`
+--
+
+DROP TABLE IF EXISTS `customer_messages`;
+CREATE TABLE IF NOT EXISTS `customer_messages` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -156,12 +173,14 @@ DROP TABLE IF EXISTS `orders`;
 CREATE TABLE IF NOT EXISTS `orders` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` bigint UNSIGNED NOT NULL,
+  `store_id` int NOT NULL,
   `total_price` decimal(10,2) NOT NULL,
   `status` enum('pending','processing','completed','canceled') COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`)
+  KEY `user_id` (`user_id`),
+  KEY `store_id` (`store_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -180,6 +199,22 @@ CREATE TABLE IF NOT EXISTS `order_items` (
   PRIMARY KEY (`id`),
   KEY `order_id` (`order_id`),
   KEY `product_id` (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_promotions`
+--
+
+DROP TABLE IF EXISTS `order_promotions`;
+CREATE TABLE IF NOT EXISTS `order_promotions` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `order_id` int NOT NULL,
+  `promotion_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `order_id` (`order_id`),
+  KEY `promotion_id` (`promotion_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -206,6 +241,7 @@ DROP TABLE IF EXISTS `payments`;
 CREATE TABLE IF NOT EXISTS `payments` (
   `id` int NOT NULL AUTO_INCREMENT,
   `order_id` int NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
   `method` enum('cash','credit_card','e_wallet') COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` enum('pending','paid','failed') COLLATE utf8mb4_unicode_ci NOT NULL,
   `transaction_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -213,6 +249,23 @@ CREATE TABLE IF NOT EXISTS `payments` (
   PRIMARY KEY (`id`),
   KEY `order_id` (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `policies`
+--
+
+DROP TABLE IF EXISTS `policies`;
+CREATE TABLE IF NOT EXISTS `policies` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `updated_by` bigint DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `updated_by` (`updated_by`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -309,6 +362,13 @@ CREATE TABLE IF NOT EXISTS `sessions` (
   KEY `sessions_last_activity_index` (`last_activity`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `sessions`
+--
+
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+('pDEzX1YYpphDin75V9Ia7xbbhHDOVWd14CplgJZ1', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoieUQ3bU1CQ2F3cFlROThDb0RqNEQxWWFhdHZXS2JaNE5VcVRHcUE0WCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zdG9yZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1742050178);
+
 -- --------------------------------------------------------
 
 --
@@ -324,7 +384,17 @@ CREATE TABLE IF NOT EXISTS `stores` (
   `latitude` decimal(10,7) NOT NULL,
   `longitude` decimal(10,7) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `stores`
+--
+
+INSERT INTO `stores` (`id`, `name`, `address`, `phone`, `latitude`, `longitude`) VALUES
+(1, 'Jollibee Tô Hiến Thành', 'Tô Hiến Thành, Quận 10, TP.HCM', '+84-42-949-7588', 10.7789198, 106.6670743),
+(2, 'Jollibee Vạn Hạnh Mall', 'Vạn Hạnh Mall, Quận 10, TP.HCM', '+84-85-592-2175', 10.7705874, 106.6698553),
+(3, 'Jollibee Âu Cơ', 'Âu Cơ, Quận Tân Bình, TP.HCM', '+84-44-438-2561', 10.7852401, 106.6421002),
+(4, 'Jollibee Pasteur', 'Pasteur, Quận 3, TP.HCM', '+84-62-122-8957', 10.7815818, 106.6948245);
 
 -- --------------------------------------------------------
 
@@ -363,7 +433,8 @@ ALTER TABLE `categories`
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`store_id`) REFERENCES `stores` (`id`);
 
 --
 -- Constraints for table `order_items`

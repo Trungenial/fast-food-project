@@ -133,4 +133,8 @@ class HomeControllers extends Controller
             'provinces'
         ));
     }
+
+    function policy() {
+        return view("pages.policy");
+    }
 }

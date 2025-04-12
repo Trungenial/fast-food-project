@@ -1,0 +1,223 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    color: #d32f2f;
+    text-align: center;
+    font-size: 2em;
+}
+
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.contact-form, .map-section {
+    flex: 1;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form h2 {
+    font-family: 'VAG Rounded', sans-serif;
+    font-weight: 600; /* Đậm vừa phải */
+    font-size: 1.6em; /* Kích thước lớn hơn một chút */
+    color: #d32f2f; /* Màu đỏ để nổi bật hơn, giống tông màu Jollibee */
+    letter-spacing: 0.5px; /* Khoảng cách giữa các chữ */
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+.dot {
+    height: 10px;
+    width: 10px;
+    background-color: #d32f2f;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+form label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form textarea {
+    height: 100px;
+}
+
+button {
+    background-color: #d32f2f;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-family: inherit;
+    padding-left: 0.9em;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    transition: all 0.2s;
+  }
+  
+  button span {
+    display: block;
+    margin-left: 0.3em;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  button svg {
+    display: block;
+    transform-origin: center center;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  button:hover .svg-wrapper {
+    animation: fly-1 0.6s ease-in-out infinite alternate;
+  }
+  
+  button:hover svg {
+    transform: translateX(1.2em) rotate(45deg) scale(1.1);
+  }
+  
+  button:hover span {
+    transform: translateX(5em);
+  }
+  
+  button:active {
+    transform: scale(0.95);
+  }
+  
+  @keyframes fly-1 {
+    from {
+      transform: translateY(0.1em);
+    }
+  
+    to {
+      transform: translateY(-0.1em);
+    }
+  }
+  
+
+.map-placeholder {
+    height: 300px;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.map-section p {
+    margin: 5px 0;
+}
+
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+    }
+}
+
+/* Style cho thông báo thành công */
+.alert-success {
+  background-color: #e6ffed; /* Màu nền xanh nhạt */
+  color: #2e7d32; /* Màu chữ xanh đậm */
+  border: 1px solid #4caf50; /* Viền xanh */
+  border-radius: 8px; /* Bo góc */
+  padding: 15px 20px; /* Khoảng cách bên trong */
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Khoảng cách giữa icon và nội dung */
+  font-size: 1em;
+  font-weight: 500;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng */
+  opacity: 1; /* Độ trong suốt ban đầu */
+  animation: fadeIn 0.5s ease-in; /* Hiệu ứng fade-in khi xuất hiện */
+  position: fixed; /* Định vị cố định */
+  top: 50%; /* Canh giữa theo chiều dọc */
+  left: 50%; /* Canh giữa theo chiều ngang */
+  transform: translate(-50%, -50%); /* Điều chỉnh chính xác vị trí trung tâm */
+  z-index: 1000; /* Đảm bảo hiển thị trên các phần tử khác */
+  width: 300px; /* Chiều rộng cố định */
+  text-align: center; /* Căn giữa nội dung */
+}
+
+/* Icon trong thông báo */
+.alert-success::before {
+  content: "\f058"; /* Icon check-circle từ Font Awesome */
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 1.2em;
+  color: #4caf50; /* Màu icon xanh */
+}
+
+/* Nút đóng (x) */
+.close-btn {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 1.2em;
+  color: #2e7d32;
+  cursor: pointer;
+  padding: 0 5px;
+  border-radius: 50%;
+}
+
+.close-btn:hover {
+  color: #d32f2f; /* Màu đỏ khi hover */
+  background-color: #e0e0e0; /* Nền xám nhạt khi hover */
+}
+
+/* Hiệu ứng fade-in khi thông báo xuất hiện */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translate(-50%, -60%);
+  }
+  to {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+  }
+}
+
+/* Hiệu ứng fade-out khi thông báo biến mất */
+.alert-success.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}

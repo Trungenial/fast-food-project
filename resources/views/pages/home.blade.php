@@ -6,7 +6,7 @@
     <div class="home-content">
         <!-- Hero Slider Banner -->
         <div class="hero-slider">
-            @foreach($slides as $slide)
+            @foreach ($slides as $slide)
                 <div class="slider-item {{ $slide['active'] ? 'active' : '' }}">
                     <img src="{{ $slide['image'] }}" alt="{{ $slide['alt'] }}" class="slider-image">
                 </div>
@@ -14,7 +14,7 @@
             <div class="slider-controls">
                 <button class="slider-prev"><i class="fas fa-chevron-left"></i></button>
                 <div class="slider-dots">
-                    @foreach($slides as $index => $slide)
+                    @foreach ($slides as $index => $slide)
                         <span class="slider-dot {{ $slide['active'] ? 'active' : '' }}"></span>
                     @endforeach
                 </div>
@@ -34,7 +34,7 @@
                 <p>Thực đơn Jollibee đa dạng và phong phú, có rất nhiều sự lựa chọn cho bạn, gia đình và bạn bè.</p>
             </div>
             <div class="menu-categories">
-                @foreach($categoryItems as $item)
+                @foreach ($categoryItems as $item)
                     <a href="{{ $item['link'] }}" class="category-item">
                         <img src="{{ $item['image'] }}" alt="{{ $item['alt'] }}">
                     </a>
@@ -49,7 +49,7 @@
                 <p>TẬN HƯỞNG NHỮNG KHOẢNH KHẮC TRỌN VẸN CÙNG JOLLIBEE</p>
             </div>
             <div class="services-grid">
-                @foreach($serviceItems as $service)
+                @foreach ($serviceItems as $service)
                     <div class="service-item">
                         <img src="{{ asset('images/home/dv/' . $service['image']) }}" alt="{{ $service['title'] }}">
                         <h3>{{ $service['title'] }}</h3>
@@ -79,7 +79,7 @@
             <div class="store-finder-form">
                 <select class="store-province">
                     <option>Chọn Tỉnh/Thành</option>
-                    @foreach($provinces as $province)
+                    @foreach ($provinces as $province)
                         <option>{{ $province }}</option>
                     @endforeach
                 </select>
@@ -96,7 +96,7 @@
                 <h2>TIN TỨC</h2>
             </div>
             <div class="news-grid">
-                @foreach($newsItems as $news)
+                @foreach ($newsItems as $news)
                     <div class="news-item">
                         <div class="news-image">
                             <img src="{{ asset('images/home/tintuc/' . $news['image']) }}" alt="{{ $news['title'] }}">
@@ -128,7 +128,7 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             // code chạy sau khi trang tải xong
             // Slider Functionality
             let currentSlide = 0;
@@ -174,3 +174,12 @@
         });
     </script>
 @endsection
+{{-- <div class="text-center my-5">
+        <h1>Chào mừng đến với Jollibee Vietnam</h1>
+        <p>Thưởng thức những món ăn ngon nhất!</p>
+        <a href="#" class="btn btn-warning">Đặt hàng ngay</a>
+        <div class='mt-1'>
+            <button class='btn btn-success btn-sm mb-1' id='add-to-cart'>Thêm vào giỏ hàng</button>
+        </div>
+    </div>
+@endsection --}}
