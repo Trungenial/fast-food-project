@@ -17,9 +17,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'App\Http\Controllers\HomeControllers@home')->name('home');
 
 Route::get('/home', 'App\Http\Controllers\HomeControllers@home')->name('home');
 
@@ -58,9 +56,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/', function () {
-    return view('welcome');
-});
 Route::get('/home','App\Http\Controllers\HomeControllers@home');
 
 Route::get('/contact','App\Http\Controllers\ContactControllers@contact');
@@ -82,6 +77,3 @@ Route::get('/thong-tin/{slug}', [FooterController::class, 'show'])->name('footer
 require __DIR__.'/auth.php';
 
 Route::get('/policy','App\Http\Controllers\HomeControllers@policy');
-
-Route::resource('categories', CategoryController::class);
-Route::resource('products', ProductController::class);
