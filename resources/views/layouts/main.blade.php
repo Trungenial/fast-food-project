@@ -10,6 +10,10 @@
 
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    {{-- <link rel="stylesheet" href="{{ asset('css/main_style.css') }}"> --}}
+
     <link rel="stylesheet" href="{{ asset('css/home_style.css') }}">
     <script src="{{ asset('js/script.js') }}"></script>
 
@@ -20,52 +24,48 @@
 
 <body>
     <div class="dashboard-sidebar">
-        <<<<<<< HEAD <a href="{{ url('/home') }}" class="active"><img src="{{ asset('images/Jollibee_logo2.png') }}"
-                alt="Brand Logo" class="brand-logo"></a>
-            =======
 
-            <a href="{{ url('/home') }}" class="active"><img src="{{ asset('images/Jollibee_logo2.png') }}"
-                    alt="Brand Logo" class="brand-logo"></a>
-            >>>>>>> develop
-            <div class='dashboard-nav-dropdown'>
-                <a href="#" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i
-                        class="fas fa-utensils"></i> DANH
-                    MỤC MÓN ĂN </a>
-                <div class='dashboard-nav-dropdown-menu'>
-                    <a href="#" class="dashboard-nav-dropdown-item">Ưu Đãi</a>
-                    <a href="#" class="dashboard-nav-dropdown-item">Món Mới</a>
-                    <a href="#" class="dashboard-nav-dropdown-item">Món ngon phải thử</a>
-                    <a href="#" class="dashboard-nav-dropdown-item">Gà giòn vui vẻ</a>
-                    <a href="#" class="dashboard-nav-dropdown-item">Mỳ ý Jolly</a>
-                    <a href="#" class="dashboard-nav-dropdown-item">Gà sốt cay</a>
-                    <a href="#" class="dashboard-nav-dropdown-item">Burger/Cơm</a>
-                    <a href="#" class="dashboard-nav-dropdown-item">Phần ăn phụ</a>
-                    <a href="#" class="dashboard-nav-dropdown-item">Tráng miệng</a>
-                    <a href="#" class="dashboard-nav-dropdown-item">Nước uống</a>
-                </div>
+        <a href="{{ url('/home') }}" class="active"><img src="{{ asset('images/Jollibee_logo2.png') }}"
+                alt="Brand Logo" class="brand-logo"></a>
+        <div class='dashboard-nav-dropdown'>
+            <a href="#" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fas fa-utensils"></i>
+                DANH
+                MỤC MÓN ĂN </a>
+            <div class='dashboard-nav-dropdown-menu'>
+                <a href="#" class="dashboard-nav-dropdown-item">Ưu Đãi</a>
+                <a href="#" class="dashboard-nav-dropdown-item">Món Mới</a>
+                <a href="#" class="dashboard-nav-dropdown-item">Món ngon phải thử</a>
+                <a href="#" class="dashboard-nav-dropdown-item">Gà giòn vui vẻ</a>
+                <a href="#" class="dashboard-nav-dropdown-item">Mỳ ý Jolly</a>
+                <a href="#" class="dashboard-nav-dropdown-item">Gà sốt cay</a>
+                <a href="#" class="dashboard-nav-dropdown-item">Burger/Cơm</a>
+                <a href="#" class="dashboard-nav-dropdown-item">Phần ăn phụ</a>
+                <a href="#" class="dashboard-nav-dropdown-item">Tráng miệng</a>
+                <a href="#" class="dashboard-nav-dropdown-item">Nước uống</a>
             </div>
-            <div class='dashboard-nav-dropdown'>
-                <a href="#" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i
-                        class="fas fa-info-circle"></i> VỀ
-                    JOLLIBEE </a>
-                <div class='dashboard-nav-dropdown-menu'>
-                    <a href="#" class="dashboard-nav-dropdown-item">Câu Chuyện Của Chúng Tôi</a>
-                    <a href="#" class="dashboard-nav-dropdown-item">Tin Khuyến Mãi</a>
-                    <a href="#" class="dashboard-nav-dropdown-item">Tin tức JOLLIBEE</a>
-                    <a href="#" class="dashboard-nav-dropdown-item">Tuyển dụng</a>
-                    <a href="#" class="dashboard-nav-dropdown-item">Đặt tiệc Sinh nhật</a>
-                    <a href="#" class="dashboard-nav-dropdown-item">Đơn Lớn Giá Hời</a>
-                </div>
+        </div>
+        <div class='dashboard-nav-dropdown'>
+            <a href="#" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i
+                    class="fas fa-info-circle"></i> VỀ
+                JOLLIBEE </a>
+            <div class='dashboard-nav-dropdown-menu'>
+                <a href="#" class="dashboard-nav-dropdown-item">Câu Chuyện Của Chúng Tôi</a>
+                <a href="#" class="dashboard-nav-dropdown-item">Tin Khuyến Mãi</a>
+                <a href="#" class="dashboard-nav-dropdown-item">Tin tức JOLLIBEE</a>
+                <a href="#" class="dashboard-nav-dropdown-item">Tuyển dụng</a>
+                <a href="#" class="dashboard-nav-dropdown-item">Đặt tiệc Sinh nhật</a>
+                <a href="#" class="dashboard-nav-dropdown-item">Đơn Lớn Giá Hời</a>
             </div>
-            <div class='dashboard-nav-dropdown'>
-                <a href="#" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i
-                        class="fas fa-phone-alt"></i> LIÊN
-                    HỆ JOLLIBEE </a>
-                <div class='dashboard-nav-dropdown-menu'>
-                    <a href="#" class="dashboard-nav-dropdown-item">Theo dõi đơn hàng</a>
-                </div>
+        </div>
+        <div class='dashboard-nav-dropdown'>
+            <a href="#" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fas fa-phone-alt"></i>
+                LIÊN
+                HỆ JOLLIBEE </a>
+            <div class='dashboard-nav-dropdown-menu'>
+                <a href="#" class="dashboard-nav-dropdown-item">Theo dõi đơn hàng</a>
             </div>
-            <a href="#" class="dashboard-nav-item"><i class="fas fa-sign-out-alt"></i> ĐĂNG XUẤT </a>
+        </div>
+        <a href="#" class="dashboard-nav-item"><i class="fas fa-sign-out-alt"></i> ĐĂNG XUẤT </a>
     </div>
     <div class="dashboard-content">
         <div class="toolbar-top">
@@ -84,10 +84,12 @@
             <span class="menu-toggle"><i class="fas fa-bars"></i></span>
             <div class="toolbar-left">
                 <div class="toolbar-menu">
-                    <a href="{{ url('/home') }}" class="{{ request()->is('home') ? 'active' : '' }}"><span>TRANG
-                            CHỦ</span></a>
-                    <a href="{{ url('/thuc-don') }}"
-                        class="{{ request()->is('thuc-don') ? 'active' : '' }}"><span>THỰC ĐƠN</span></a>
+                    <a href="{{ url('/home') }}" class="{{ request()->is('home') ? 'active' : '' }}">
+                        <span>TRANG CHỦ</span></a>
+                    <a href="{{ url('/menu') }}"
+                        class="nav-link {{ request()->is('menu') || request()->is('menu/category/*') ? 'active' : '' }}">
+                        THỰC ĐƠN
+                    </a>
                     <a href="{{ url('/khuyen-mai') }}"
                         class="{{ request()->is('khuyen-mai') ? 'active' : '' }}"><span>KHUYẾN MÃI</span></a>
                     <a href="{{ url('/dich-vu-tiec') }}"
@@ -148,13 +150,18 @@
                     <ul>
                         <li><a href="{{ url('/contact') }}"
                                 class="{{ request()->is('contact') ? 'active' : '' }}">Liên hệ</a></li>
-                        <li><a href="#">Chính sách & quy định chung</a></li>
-                        <li><a href="#">Chính sách thanh toán</a></li>
-                        <li><a href="#">Chính sách hoạt động</a></li>
-                        <li><a href="#">Chính sách bảo mật</a></li>
-                        <li><a href="#">Vận chuyển & giao nhận</a></li>
-                        <li><a href="#">Thông tin đăng ký giao dịch</a></li>
-                        <li><a href="#">Hướng dẫn đặt hàng</a></li>
+                        <li><a href="{{ route('footer.show', 'chinh-sach-quy-dinh-chung') }}">Chính sách & quy
+                                định chung</a></li>
+                        <li><a href="{{ route('footer.show', 'chinh-sach-thanh-toan') }}">Chính sách thanh
+                                toán</a></li>
+                        <li><a href="{{ route('footer.show', 'chinh-sach-hoat-dong') }}">Chính sách hoạt động</a>
+                        </li>
+                        <li><a href="{{ route('footer.show', 'chinh-sach-bao-mat') }}">Chính sách bảo mật</a></li>
+                        <li><a href="{{ route('footer.show', 'van-chuyen-giao-nhan') }}">Vận chuyển & giao
+                                nhận</a></li>
+                        <li><a href="{{ route('footer.show', 'thong-tin-dang-ky-giao-dich') }}">Thông tin đăng ký
+                                giao dịch</a></li>
+                        <li><a href="{{ route('footer.show', 'huong-dan-dat-hang') }}">Hướng dẫn đặt hàng</a></li>
                     </ul>
                 </div>
                 <div class="footer-right">

@@ -183,18 +183,15 @@ body {
 .toolbar-menu a:focus,
 .toolbar-menu a:active {
     letter-spacing: 3px;
-    background-color: yellow;
-    color: rgb(0, 0, 0);
-    box-shadow: rgb(255 193 7) 0px 0px 0px 0px;
-    transform: translateY(10px);
-    transition: 100ms;
+    background-color: red;
+    color: white;
+    box-shadow: rgb(220 24 24) 0px 7px 29px 0px;
 }
 
 .toolbar-menu a.active {
-    background-color: yellow !important;
-    color: rgb(0, 0, 0) !important;
-    box-shadow: rgb(255 193 7) 0px 0px 0px 0px;
-    transform: translateY(10px);
+    background-color: red !important;
+    color: white !important;
+    box-shadow: rgb(220 24 24) 0px 7px 29px 0px;
     transition: 100ms;
 }
 

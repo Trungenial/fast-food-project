@@ -2,6 +2,10 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\FooterController;
+
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
@@ -63,6 +67,18 @@ Route::get('/contact','App\Http\Controllers\ContactControllers@contact');
 Route::post('/contact','App\Http\Controllers\ContactControllers@message');
 
 Route::get('/store','App\Http\Controllers\StoreControllers@store');
+
+
+Route::resource('categories', CategoryController::class);
+Route::resource('products', ProductController::class);
+
+Route::get('/menu','App\Http\Controllers\MenuControllers@menu');
+
+Route::get('/menu','App\Http\Controllers\MenuControllers@index');
+Route::get('/menu/category/{id}','App\Http\Controllers\MenuControllers@category');
+
+Route::get('/thong-tin/{slug}', [FooterController::class, 'show'])->name('footer.show');
+
 require __DIR__.'/auth.php';
 
 Route::get('/policy','App\Http\Controllers\HomeControllers@policy');
