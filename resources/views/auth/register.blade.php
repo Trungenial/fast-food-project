@@ -1,3 +1,14 @@
+<style>
+
+    #register-header{
+        text-align: center;
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: xx-large;
+        font-weight: bolder;
+        text-transform: uppercase;
+        color: #dc2626;
+    }
+</style>
 @extends("layouts.main")
 @section('title','Đăng ký tài khoản')
 @section('content')
@@ -5,14 +16,11 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 <x-guest-layout>
-    <div class="register-container">
-        <div class="register-header">
-            <h1 class="page-title text-center
-            font-extrabold text-3xl px-4 py-2 
-            text-red-600 rounded-md w-fit mx-auto"
-            style="font-weight: 900;">
+    <div id="register-container">
+        <div id="register-header">
+            <span>
                 ĐĂNG KÝ TÀI KHOẢN
-            </h1>
+            <span>
         </div>
         <div class="register-body">
             <form class="register-form-wrapper" method="POST" action="{{ route('register') }}">
@@ -31,7 +39,7 @@
                         <x-text-input id="customer-firstname" name="customer-firstname"
                         class="block mt-1 w-full" type="text"
                         :value="old('name')" 
-                        required autofocus autocomplete="name" 
+                        required autofocus autocomplete="firstname" 
                         placeholder="Tên *"/>
                 
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
@@ -40,7 +48,7 @@
                         <x-text-input id="customer-phone-number" name="customer-phone-number" 
                         class="block mt-1 w-full" type="text"  
                         :value="old('name')" 
-                        required autofocus autocomplete="name" placeholder="Số điện thoại *"/>
+                        required autofocus autocomplete="phonenumber" placeholder="Số điện thoại *"/>
                 
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
@@ -48,14 +56,14 @@
                         <x-text-input id="customer-email" name="customer-email"
                         class="block mt-1 w-full" type="email"
                         :value="old('email')" 
-                        required autocomplete="username" placeholder="Email *"/>
+                        required autocomplete="email" placeholder="Email *"/>
                 
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
                     <div name="password" class="form-group mt-4">
                         <x-text-input id="customer-password" name="customer-password"
                         class="block mt-1 w-full" type="password"
-                        required autocomplete="new-password" 
+                        required autocomplete="password" 
                         placeholder="Mật khẩu *"/>
 
                         <x-input-error :messages="$errors->get('password')" class="mt-2" />

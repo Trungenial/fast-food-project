@@ -18,6 +18,7 @@
 
 <body>
     <div class="dashboard-sidebar">
+
         <a href="{{ url('/home') }}" class="active"><img src="{{ asset('images/Jollibee_logo2.png') }}" alt="Brand Logo" class="brand-logo"></a>
         <div class='dashboard-nav-dropdown'>
             <a href="#" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fas fa-utensils"></i> DANH MỤC MÓN ĂN </a>
@@ -81,8 +82,10 @@
                 </div>
             </div>
             <div class="toolbar-right">
+                <i class="fa-solid fa-user"></i>
+                <a href="{{ route('register') }}" style="margin-right: 0; color: black; font-weight: bold; text-decoration: none;">ĐĂNG KÝ/</a>
+                <a href="{{ route('login') }}"   style="margin-left: 0; color: black; font-weight: bold; text-decoration: none;">ĐĂNG NHẬP</a>
                 <div class="icon-button"><i class="fas fa-map-marker-alt"></i></div>
-                <div class="icon-button"><i class="fas fa-user"></i></div>
                 <div class="icon-button"><i class="fas fa-shopping-cart"></i></div>
             </div>
         </div>
