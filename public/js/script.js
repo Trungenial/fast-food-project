@@ -1,5 +1,5 @@
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     let currentPath = window.location.pathname;
     const menuItems = document.querySelectorAll('.toolbar-menu a');
 
@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         // Xử lý sự kiện click trên menu
-        link.addEventListener('click', function() {
+        link.addEventListener('click', function () {
             menuItems.forEach(item => item.classList.remove('active'));
             this.classList.add('active');
         });
@@ -19,16 +19,17 @@ document.addEventListener("DOMContentLoaded", function() {
     // Xử lý toggle menu sidebar
     const menuToggle = document.querySelector('.menu-toggle');
     if (menuToggle) {
-        menuToggle.addEventListener('click', function() {
+        menuToggle.addEventListener('click', function () {
             document.body.classList.toggle('sidebar-open');
         });
     }
 
     // Xử lý dropdown trong dashboard navigation
     document.querySelectorAll('.dashboard-nav-dropdown-toggle').forEach(item => {
-        item.addEventListener('click', function(event) {
+        item.addEventListener('click', function (event) {
             event.preventDefault();
             this.parentElement.classList.toggle('open');
         });
     });
 });
+

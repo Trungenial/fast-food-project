@@ -10,17 +10,21 @@
 
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('css/main_style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/home_style.css') }}">
     <script src="{{ asset('js/script.js') }}"></script>
+
+
 
 </head>
 
 
 <body>
     <div class="dashboard-sidebar">
-        <a href="{{ url('/home') }}" class="active"><img src="{{ asset('images/Jollibee_logo2.png') }}" alt="Brand Logo" class="brand-logo"></a>
+        <a href="{{ url('/home') }}" class="active"><img src="{{ asset('images/Jollibee_logo2.png') }}" alt="Brand Logo"
+                class="brand-logo"></a>
         <div class='dashboard-nav-dropdown'>
-            <a href="#" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fas fa-utensils"></i> DANH MỤC MÓN ĂN </a>
+            <a href="#" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fas fa-utensils"></i> DANH
+                MỤC MÓN ĂN </a>
             <div class='dashboard-nav-dropdown-menu'>
                 <a href="#" class="dashboard-nav-dropdown-item">Ưu Đãi</a>
                 <a href="#" class="dashboard-nav-dropdown-item">Món Mới</a>
@@ -35,7 +39,8 @@
             </div>
         </div>
         <div class='dashboard-nav-dropdown'>
-            <a href="#" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fas fa-info-circle"></i> VỀ JOLLIBEE </a>
+            <a href="#" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fas fa-info-circle"></i> VỀ
+                JOLLIBEE </a>
             <div class='dashboard-nav-dropdown-menu'>
                 <a href="#" class="dashboard-nav-dropdown-item">Câu Chuyện Của Chúng Tôi</a>
                 <a href="#" class="dashboard-nav-dropdown-item">Tin Khuyến Mãi</a>
@@ -46,7 +51,8 @@
             </div>
         </div>
         <div class='dashboard-nav-dropdown'>
-            <a href="#" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fas fa-phone-alt"></i> LIÊN HỆ JOLLIBEE </a>
+            <a href="#" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fas fa-phone-alt"></i> LIÊN
+                HỆ JOLLIBEE </a>
             <div class='dashboard-nav-dropdown-menu'>
                 <a href="#" class="dashboard-nav-dropdown-item">Theo dõi đơn hàng</a>
             </div>
@@ -59,7 +65,8 @@
                 <i class="fas fa-drumstick-bite" style="color: #e31837;"></i>
             </div>
             <div class="logo-container">
-                <a href="{{ url('/home') }}" class="active"> <img src="{{ asset('images/Header.png') }}" alt="Jollibee Logo" class="logo"> </a>
+                <a href="{{ url('/home') }}" class="active"> <img src="{{ asset('images/Header.png') }}"
+                        alt="Jollibee Logo" class="logo"> </a>
             </div>
             <div class="decor-right">
                 <i class="fas fa-drumstick-bite" style="color: #e31837;"></i>
@@ -69,13 +76,20 @@
             <span class="menu-toggle"><i class="fas fa-bars"></i></span>
             <div class="toolbar-left">
                 <div class="toolbar-menu">
-                    <a href="{{ url('/home') }}" class="{{ request()->is('home') ? 'active' : '' }}"><span>TRANG CHỦ</span></a>
-                    <a href="{{ url('/thuc-don') }}" class="{{ request()->is('thuc-don') ? 'active' : '' }}"><span>THỰC ĐƠN</span></a>
-                    <a href="{{ url('/khuyen-mai') }}" class="{{ request()->is('khuyen-mai') ? 'active' : '' }}"><span>KHUYẾN MÃI</span></a>
-                    <a href="{{ url('/dich-vu-tiec') }}" class="{{ request()->is('dich-vu-tiec') ? 'active' : '' }}"><span>DỊCH VỤ TIỆC</span></a>
-                    <a href="{{ url('/nha-hang') }}" class="{{ request()->is('nha-hang') ? 'active' : '' }}"><span>HỆ THỐNG NHÀ HÀNG</span></a>
-                    <a href="{{ url('/lien-he') }}" class="{{ request()->is('lien-he') ? 'active' : '' }}"><span>LIÊN HỆ</span></a>
-                    <a href="{{ url('/tuyen-dung') }}" class="{{ request()->is('tuyen-dung') ? 'active' : '' }}"><span>TUYỂN DỤNG</span></a>
+                    <a href="{{ url('/home') }}" class="{{ request()->is('home') ? 'active' : '' }}"><span>TRANG
+                            CHỦ</span></a>
+                    <a href="{{ url('/thuc-don') }}" class="{{ request()->is('thuc-don') ? 'active' : '' }}"><span>THỰC
+                            ĐƠN</span></a>
+                    <a href="{{ url('/khuyen-mai') }}"
+                        class="{{ request()->is('khuyen-mai') ? 'active' : '' }}"><span>KHUYẾN MÃI</span></a>
+                    <a href="{{ url('/dich-vu-tiec') }}"
+                        class="{{ request()->is('dich-vu-tiec') ? 'active' : '' }}"><span>DỊCH VỤ TIỆC</span></a>
+                    <a href="{{ url('/nha-hang') }}" class="{{ request()->is('nha-hang') ? 'active' : '' }}"><span>HỆ
+                            THỐNG NHÀ HÀNG</span></a>
+                    <a href="{{ url('/lien-he') }}" class="{{ request()->is('lien-he') ? 'active' : '' }}"><span>LIÊN
+                            HỆ</span></a>
+                    <a href="{{ url('/tuyen-dung') }}"
+                        class="{{ request()->is('tuyen-dung') ? 'active' : '' }}"><span>TUYỂN DỤNG</span></a>
 
 
                 </div>
@@ -94,7 +108,8 @@
                 <div class="footer-left">
                     <img src="{{ asset('images/Jollibee_logo2.png') }}" alt="Jollibee Logo" class="footer-logo">
                     <p><strong>CÔNG TY TNHH JOLLIBEE VIỆT NAM</strong></p>
-                    <p>Địa chỉ: Tầng 26, Tòa nhà CII Tower, số 152 Điện Biên Phủ, Phường 25, Quận Bình Thạnh, TP. Hồ Chí Minh, Việt Nam</p>
+                    <p>Địa chỉ: Tầng 26, Tòa nhà CII Tower, số 152 Điện Biên Phủ, Phường 25, Quận Bình Thạnh, TP. Hồ Chí
+                        Minh, Việt Nam</p>
                     <p>Điện thoại: (028) 39309168</p>
                     <p>Tổng đài: 1900-1533</p>
                     <p>Mã số thuế: 0303883266</p>
