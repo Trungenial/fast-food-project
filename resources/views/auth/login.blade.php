@@ -22,7 +22,7 @@
         left: 50%;
         transform: translate(-50%, -50%);
         box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-        animation: slideFromTopRight 0.4s ease-out;
+        animation: fadeIn  0.4s ease-out;
     }
     .close {
         position: absolute;
@@ -30,16 +30,17 @@
         font-size: 30px;
         cursor: pointer;
     }
-    @keyframes slideFromTopRight {
-        from {
-            opacity: 0;
-            transform: translate(100px, -100px); /* Từ trên phải */
+    @keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0); 
         }
-        to {
-            opacity: 1;
-            transform: translate(0, 0); /* Về vị trí trung tâm */
+    to {
+        opacity: 1;
+        transform: scale(1);
         }
     }
+
 
     #login-header{
         justify-content: center;

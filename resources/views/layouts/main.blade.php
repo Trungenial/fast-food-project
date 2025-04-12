@@ -82,11 +82,24 @@
                 </div>
             </div>
             <div class="toolbar-right">
+                <div class="icon-button"><i class="fas fa-map-marker-alt"></i></div>
+                <div class="icon-button"  style='color:red;position:relative' >
+                    <div style='width:20px; height:20px;background-color: #facc15; font-size:12px; border:none;
+                        border-radius:50%; position:absolute;right:0;top:-2px' id='cart-number-product'>
+                        @if (session('cart'))
+                            {{ count(session('cart')) }}
+                        @else
+                        0
+                        @endif
+                    </div>
+                    <a href="#" style='cursor:pointer; color:white;'>
+                        <i class="fa fa-cart-arrow-down fa-2x mr-2 mt-2" aria-hidden="true"></i>
+                    </a>
+                </div>
                 <i class="fa-solid fa-user"></i>
                 <a href="{{ route('register') }}" style="margin-right: 0; color: black; font-weight: bold; text-decoration: none;">ĐĂNG KÝ/</a>
                 <a href="{{ route('login') }}"   style="margin-left: 0; color: black; font-weight: bold; text-decoration: none;">ĐĂNG NHẬP</a>
-                <div class="icon-button"><i class="fas fa-map-marker-alt"></i></div>
-                <div class="icon-button"><i class="fas fa-shopping-cart"></i></div>
+                
             </div>
         </div>
         <div class="dashboard-main">

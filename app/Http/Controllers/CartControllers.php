@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CartControllers extends Controller
 {
-    public function order() {
-        return view ('pages.order');
-    }
+
 }

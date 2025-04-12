@@ -69,7 +69,7 @@
                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
                     <div name="comfirmation-password" class="form-group mt-4">
-                        <x-text-input id="customer-comfirmation-password"  name="customer-comfirmation-password"
+                        <x-text-input id="password-confirmation"  name="password-confirmation"
                         class="block mt-1 w-full" type="password"
                         required autocomplete="new-password" 
                         placeholder="Nhập lại mật khẩu *"/>
@@ -115,7 +115,7 @@
 
                     <div name="customer-gender" class="form-group mt-4">
                         <div class="">
-                            <select id="customer-gender" name="customer-gender" title="Giới tính"
+                            <select id="province" name="province" title="Giới tính"
                             class="validate select block mt-1 w-full
                                     w-full px-4 py-2 border border-gray-300 rounded-md bg-white text-left flex items-center 
                                     justify-between hover:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
@@ -205,8 +205,7 @@
                     <div name="discount-choice" class="mt-4">
                         <x-text-input id="discount-checkbox"
                             type="checkbox"
-                            name="discount-checkbox"
-                            required />
+                            name="discount-checkbox" />
                         
                             <label>Nhận chương trình khuyến mãi qua email</label>
                         <x-input-error  :messages="$errors->get('password_confirmation')" class="mt-2" />
