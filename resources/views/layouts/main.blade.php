@@ -97,7 +97,8 @@
                     <a href="{{ url('/store') }}" class="{{ request()->is('store') ? 'active' : '' }}"><span>HỆ
                             THỐNG NHÀ HÀNG</span></a>
                     <a href="{{ url('/contact') }}"
-                        class="{{ request()->is('contact') ? 'active' : '' }}"><span>LIÊN HỆ</span></a>
+                        class="{{ request()->is('contact') ? 'active' : '' }}"><span>LIÊN
+                            HỆ</span></a>
                     <a href="{{ url('/tuyen-dung') }}"
                         class="{{ request()->is('tuyen-dung') ? 'active' : '' }}"><span>TUYỂN DỤNG</span></a>
                 </div>
