@@ -20,6 +20,7 @@ class AdminAuthController extends Controller
             'password' => ['required'],
         ]);
 
+        // dd(Auth::guard('admin')->attempt($credentials));
         if (Auth::guard('admin')->attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended(route('admin.dashboard'));
@@ -38,3 +39,4 @@ class AdminAuthController extends Controller
         return redirect()->route('admin.login');
     }
 }
+

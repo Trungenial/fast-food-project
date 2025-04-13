@@ -10,10 +10,24 @@ class AdminSeeder extends Seeder
 {
     public function run()
     {
-        Admin::create([
-            'name' => 'Admin',
-            'email' => 'admin@example.com',
-            'password' => Hash::make('password') // This will use Bcrypt by default
-        ]);
+        $admins = [
+            [
+                'name' => 'Admin',
+                'email' => 'admin@example.com',
+                'password' => 'password'
+            ],
+            [
+                'name' => 'Admin Test',  // Your new admin
+                'email' => 'test@admin.com',
+                'password' => 'password123'
+            ]
+        ];
+
+        foreach ($admins as $admin) {
+            Admin::firstOrCreate(
+                ['email' => $admin['email']],
+                $admin
+            );
+        }
     }
 }

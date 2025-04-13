@@ -67,6 +67,9 @@ Route::get('/store','App\Http\Controllers\StoreControllers@store');
 Route::prefix('admin')->group(function () {
     // Guest routes
     Route::middleware('guest')->group(function () {
+        Route::get('/', function () {
+            return redirect()->route('admin.login');
+        });
         Route::get('login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
         Route::post('login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
     });
