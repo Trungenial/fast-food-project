@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
@@ -63,9 +64,29 @@ Route::post('/contact','App\Http\Controllers\ContactControllers@message');
 
 Route::get('/store','App\Http\Controllers\StoreControllers@store');
 
+Route::prefix('admin')->group(function () {
+    // Guest routes
+    Route::middleware('guest')->group(function () {
+        Route::get('/', function () {
+            return redirect()->route('admin.login');
+        });
+        Route::get('login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
+        Route::post('login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
+    });
 
-Route::resource('categories', CategoryController::class);
-Route::resource('products', ProductController::class);
+    // Protected routes
+    Route::middleware('auth:admin')->group(function () {
+        Route::get('/', function () {
+            return redirect()->route('admin.dashboard');
+        });
+        Route::get('dashboard', function () {
+            return view('admin.dashboard');
+        })->name('admin.dashboard');
+        Route::post('logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+        Route::resource('categories', CategoryController::class);
+        Route::resource('products', ProductController::class);
+    });
+});
 
 Route::get('/menu','App\Http\Controllers\MenuControllers@menu');
 
