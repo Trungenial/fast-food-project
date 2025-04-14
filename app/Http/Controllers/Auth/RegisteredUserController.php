@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
@@ -28,58 +30,57 @@ class RegisteredUserController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request): RedirectResponse
-{
-    $request->validate([
-        'customer-lastname' => ['required', 'string', 'max:255'],
-        'customer-firstname' => ['required', 'string', 'max:255'],
-        'customer-phone-number' => ['required', 'regex:/^[0-9]{9,15}$/'],
-        'customer-email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
-        'customer-password' => ['required', 'confirmed', Rules\Password::defaults()],
-        'birthdate' => ['required', 'date_format:d/m/Y'],
-        'customer-gender' => ['required', 'in:1,2,3'],
-        'province' => ['required', 'string'],
-        'agree-checkbox' => ['accepted'],
-    ]);
-    dd($request);
-    // Gộp họ và tên
-    $fullName = $request->input('customer-lastname') . ' ' . $request->input('customer-firstname');
+    {
+        if ($request->has('birthdate')) {
+            try {
+                $convertedDate = Carbon::createFromFormat('d/m/Y', $request->birthdate)->format('Y-m-d');
+                $request->merge(['birthdate' => $convertedDate]);
+            } catch (\Exception $e) {
+                Log::error('Lỗi chuyển đổi ngày sinh: ' . $e->getMessage(), [
+                    'input_birthdate' => $request->birthdate,
+                    'exception' => $e
+                ]);
 
-    $user = User::create([
-        'name' => $fullName,
-        'email' => $request->input('customer-email'),
-        'password' => Hash::make($request->input('customer-password')),
-        'phone' => $request->input('customer-phone-number'),
-        'birthdate' => \Carbon\Carbon::createFromFormat('d/m/Y', $request->input('birthdate'))->format('Y-m-d'),
-        'gender' => $request->input('customer-gender'),
-        'province' => $request->input('province'),
-        'agree_policy' => true,
-        'receive_discount' => $request->has('discount-checkbox'),
-    ]);
+                return back()->withErrors(['birthdate' => 'Ngày sinh không hợp lệ.'])->withInput();
+            }
+        }
 
-    event(new Registered($user));
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
+                'password' => ['required', 'confirmed', Rules\Password::defaults()],
+                'phone' => 'nullable|string|max:20',
+                'birthdate' => 'nullable|date',
+                'gender' => 'nullable|in:male,female,other',
+                'province' => 'nullable|string|max:255',
+                'agree_policy' => 'required|boolean',
+                'receive_discount' => 'nullable|boolean',
+            ]);
 
-    Auth::login($user);
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'phone' => $request->phone,
+                'birthdate' => $request->birthdate,
+                'gender' => $request->gender,
+                'province' => $request->province,
+                'agree_policy' => $request->agree_policy,
+                'receive_discount' => $request->receive_discount ?? false,
+            ]);
 
-    return redirect()->route('dashboard');
+            event(new Registered($user));
+            Auth::login($user);
+
+            return redirect(route('dashboard', absolute: false));
+        } catch (\Exception $e) {
+            Log::error('Lỗi khi tạo người dùng: ' . $e->getMessage(), [
+                'request_data' => $request->all(),
+                'exception' => $e
+            ]);
+
+            return back()->withErrors(['error' => 'Đã xảy ra lỗi khi đăng ký. Vui lòng thử lại.'])->withInput();
+        }
+    }
 }
-}
-// public function store(Request $request): RedirectResponse
-//     {
-//         $request->validate([
-//             'name' => ['required', 'string', 'max:255'],
-//             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-//             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-//         ]);
-
-//         $user = User::create([
-//             'name' => $request->name,
-//             'email' => $request->email,
-//             'password' => Hash::make($request->password),
-//         ]);
-
-//         event(new Registered($user));
-
-//         Auth::login($user);
-
-//         return redirect(route('dashboard', absolute: false));
-//     }
