@@ -15,10 +15,14 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\AddressController;
+use App\Http\Controllers\AccountController;
+use App\Http\Controllers\MenuControllers;
 
+Route::get('/get-districts/{province}', [AddressController::class, 'getDistricts']);
+Route::get('/get-wards/{district}', [AddressController::class, 'getWards']);
 
-Route::get('/', 'App\Http\Controllers\HomeControllers@home')->name('home');
-
+Route::get('/', 'App\Http\Controllers\HomeControllers@home');
 Route::get('/home', 'App\Http\Controllers\HomeControllers@home')->name('home');
 
 // Other routes to be added later
@@ -46,6 +50,30 @@ Route::get('/tuyen-dung', function () {
     return view('pages.tuyen-dung');
 })->name('tuyen-dung');
 
+Route::get('/home', 'App\Http\Controllers\HomeControllers@home');
+
+Route::get('/contact', 'App\Http\Controllers\ContactControllers@contact');
+Route::post('/contact', 'App\Http\Controllers\ContactControllers@message');
+
+Route::get('/store', 'App\Http\Controllers\StoreControllers@store');
+
+
+Route::resource('categories', CategoryController::class);
+Route::resource('products', ProductController::class);
+
+Route::get('/menu', 'App\Http\Controllers\MenuControllers@menu');
+
+Route::get('/menu', 'App\Http\Controllers\MenuControllers@index');
+Route::get('/menu/category/{id}', 'App\Http\Controllers\MenuControllers@category');
+
+Route::get('/thong-tin/{slug}', [FooterController::class, 'show'])->name('footer.show');
+
+require __DIR__ . '/auth.php';
+
+Route::get('/policy', 'App\Http\Controllers\HomeControllers@policy');
+
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -56,24 +84,20 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/home','App\Http\Controllers\HomeControllers@home');
+require __DIR__ . '/auth.php';
 
-Route::get('/contact','App\Http\Controllers\ContactControllers@contact');
-Route::post('/contact','App\Http\Controllers\ContactControllers@message');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/accountpanel', [AccountController::class, 'accountpanel'])->name('account');
+    Route::post('/account/update', [AccountController::class, 'saveaccountinfo'])->name('saveinfo');
+});
 
-Route::get('/store','App\Http\Controllers\StoreControllers@store');
+Route::get('/order', 'App\Http\Controllers\MenuControllers@order')->name('order');
+Route::post('/cart/add', 'App\Http\Controllers\MenuControllers@cartadd')->name('cartadd');
+Route::post('/cart/delete', 'App\Http\Controllers\MenuControllers@cartdelete')->name('cartdelete');
+Route::post('/order/create', 'App\Http\Controllers\MenuControllers@ordercreate')
+    ->middleware('auth')->name('ordercreate');
 
-
-Route::resource('categories', CategoryController::class);
-Route::resource('products', ProductController::class);
-
-Route::get('/menu','App\Http\Controllers\MenuControllers@menu');
-
-Route::get('/menu','App\Http\Controllers\MenuControllers@index');
-Route::get('/menu/category/{id}','App\Http\Controllers\MenuControllers@category');
-
-Route::get('/thong-tin/{slug}', [FooterController::class, 'show'])->name('footer.show');
-
-require __DIR__.'/auth.php';
-
-Route::get('/policy','App\Http\Controllers\HomeControllers@policy');
+Route::middleware('auth')->group(function () {
+    Route::get('/my-orders', [MenuControllers::class, 'myOrders'])->name('myorders');
+    Route::get('/order-detail/{id}', [MenuControllers::class, 'orderDetail'])->name('orderdetail');
+});

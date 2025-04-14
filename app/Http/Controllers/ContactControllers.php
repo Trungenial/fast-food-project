@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
 
+
 class ContactControllers extends Controller
 {
     function contact() {

@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\DB;
 
 class RegisteredUserController extends Controller
 {
@@ -28,58 +30,47 @@ class RegisteredUserController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request): RedirectResponse
-{
-    $request->validate([
-        'customer-lastname' => ['required', 'string', 'max:255'],
-        'customer-firstname' => ['required', 'string', 'max:255'],
-        'customer-phone-number' => ['required', 'regex:/^[0-9]{9,15}$/'],
-        'customer-email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
-        'customer-password' => ['required', 'confirmed', Rules\Password::defaults()],
-        'birthdate' => ['required', 'date_format:d/m/Y'],
-        'customer-gender' => ['required', 'in:1,2,3'],
-        'province' => ['required', 'string'],
-        'agree-checkbox' => ['accepted'],
-    ]);
-    dd($request);
-    // Gộp họ và tên
-    $fullName = $request->input('customer-lastname') . ' ' . $request->input('customer-firstname');
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users'],
+            'phone' => ['required', 'string', 'max:20'],
+            'address' => ['required', 'string'],
+            'province_code' => ['required', 'string'],
+            'district_code' => ['required', 'string'],
+            'ward_code' => ['required', 'string'],
+            'gender' => ['required', 'in:Nam,Nữ,Khác'],
+            'birthday' => ['required', 'date'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
 
-    $user = User::create([
-        'name' => $fullName,
-        'email' => $request->input('customer-email'),
-        'password' => Hash::make($request->input('customer-password')),
-        'phone' => $request->input('customer-phone-number'),
-        'birthdate' => \Carbon\Carbon::createFromFormat('d/m/Y', $request->input('birthdate'))->format('Y-m-d'),
-        'gender' => $request->input('customer-gender'),
-        'province' => $request->input('province'),
-        'agree_policy' => true,
-        'receive_discount' => $request->has('discount-checkbox'),
-    ]);
+        // Lấy tên từ mã
+        $province = DB::table('provinces')->where('code', $request->province_code)->value('name');
+        $district = DB::table('districts')->where('code', $request->district_code)->value('name');
+        $ward     = DB::table('wards')->where('code', $request->ward_code)->value('name');
 
-    event(new Registered($user));
+        // Chèn vào DB
+        $userId = DB::table('users')->insertGetId([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'province' => $province,
+            'district' => $district,
+            'ward' => $ward,
+            'password' => Hash::make($request->password),
+            'role' => 'customer',
+            'gender' => $request->gender,
+            'birthday' => $request->birthday,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
 
-    Auth::login($user);
+        $user = DB::table('users')->where('id', $userId)->first();
 
-    return redirect()->route('dashboard');
+        event(new Registered((object)$user)); 
+        Auth::loginUsingId($userId);
+
+        return redirect(RouteServiceProvider::HOME);
+    }
 }
-}
-// public function store(Request $request): RedirectResponse
-//     {
-//         $request->validate([
-//             'name' => ['required', 'string', 'max:255'],
-//             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-//             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-//         ]);
-
-//         $user = User::create([
-//             'name' => $request->name,
-//             'email' => $request->email,
-//             'password' => Hash::make($request->password),
-//         ]);
-
-//         event(new Registered($user));
-
-//         Auth::login($user);
-
-//         return redirect(route('dashboard', absolute: false));
-//     }

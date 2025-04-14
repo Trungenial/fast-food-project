@@ -16,7 +16,36 @@
 
     <link rel="stylesheet" href="{{ asset('css/home_style.css') }}">
     <script src="{{ asset('js/script.js') }}"></script>
+    <style>
+        .cart-icon {
+            position: relative;
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            transition: transform 0.2s ease-in-out;
+        }
 
+        .cart-icon:hover {
+            transform: scale(1.1);
+            color: #ffc107;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -6px;
+            right: -10px;
+            background-color: #23b85c;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            border-radius: 50%;
+            text-align: center;
+            box-shadow: 0 0 0 2px white;
+        }
+    </style>
 
 
 </head>
@@ -103,29 +132,59 @@
                         class="{{ request()->is('tuyen-dung') ? 'active' : '' }}"><span>TUYỂN DỤNG</span></a>
                 </div>
             </div>
-            <div class="toolbar-right">
-                <div class="icon-button"><i class="fas fa-map-marker-alt"></i></div>
-                <div class="icon-button" style='color:red;position:relative'>
-                    <div style='width:20px; height:20px;background-color: #facc15; font-size:12px; border:none;
-                        border-radius:50%; position:absolute;right:0;top:-2px'
-                        id='cart-number-product'>
-                        @if (session('cart'))
-                            {{ count(session('cart')) }}
-                        @else
-                            0
-                        @endif
-                    </div>
-                    <a href="#" style='cursor:pointer; color:white;'>
-                        <i class="fa fa-cart-arrow-down fa-2x mr-2 mt-2" aria-hidden="true"></i>
-                    </a>
-                </div>
-                <i class="fa-solid fa-user"></i>
-                <a href="{{ route('register') }}"
-                    style="margin-right: 0; color: black; font-weight: bold; text-decoration: none;">ĐĂNG KÝ/</a>
-                <a href="{{ route('login') }}"
-                    style="margin-left: 0; color: black; font-weight: bold; text-decoration: none;">ĐĂNG NHẬP</a>
 
+            <div class="cart-wrapper position-relative me-3">
+                <a href="{{ route('order') }}" class="cart-icon">
+                    <i class="fas fa-shopping-cart fa-2x text-white"></i>
+                    <span class="cart-badge" id="cart-number-product">
+                        {{ session('cart') ? array_sum(session('cart')) : 0 }}
+                    </span>
+                </a>
             </div>
+            <div class="toolbar-right">
+                @auth
+                <div class="dropdown d-inline-block">
+                    <button type="button" class="btn btn-danger dropdown-toggle fw-bold text-white px-3 py-2" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user-circle me-2"></i> {{ Auth::user()->name }}
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end shadow">
+                        <li>
+                            <a class="dropdown-item text-dark" href="{{ route('account') }}">
+                                <i class="fas fa-user-cog me-2 text-primary"></i> Quản lý tài khoản
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item text-dark" href="{{ route('myorders') }}">
+                                <i class="fas fa-receipt me-2 text-success"></i> Đơn hàng của tôi
+                            </a>
+                        </li>
+
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <a class="dropdown-item text-danger" href="#" onclick="event.preventDefault(); this.closest('form').submit();">
+                                    <i class="fas fa-sign-out-alt me-2"></i> Đăng xuất
+                                </a>
+                            </form>
+                        </li>
+
+                    </ul>
+                </div>
+                @else
+                <a href="{{ route('login') }}">
+                    <button class="btn btn-outline-light text-dark fw-bold me-2">
+                        <i class="fas fa-sign-in-alt me-1"></i> Đăng nhập
+                    </button>
+                </a>
+                <a href="{{ route('register') }}">
+                    <button class="btn btn-warning fw-bold text-red-700">
+                        <i class="fas fa-user-plus me-1"></i> Đăng ký
+                    </button>
+                </a>
+                @endauth
+            </div>
+
         </div>
         <div class="dashboard-main">
             @yield('content')
@@ -187,7 +246,8 @@
             </div>
         </footer>
     </div>
-
+    @stack('scripts')
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </html>
