@@ -115,7 +115,7 @@
                             0
                         @endif
                     </div>
-                    <a href="#" style='cursor:pointer; color:white;'>
+                    <a href="{{route('vieworder')}}" style='cursor:pointer; color:white;'>
                         <i class="fa fa-cart-arrow-down fa-2x mr-2 mt-2" aria-hidden="true"></i>
                     </a>
                 </div>

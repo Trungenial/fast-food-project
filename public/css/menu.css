@@ -84,3 +84,16 @@
 .category-item.active {
     background-color: #ff5722;
 }
+
+.order{
+    display: flex;
+    gap: 10px;
+}
+
+.product-number{
+    flex: 3;
+}
+
+.btn-add-to-cart{
+    flex: 7;
+}

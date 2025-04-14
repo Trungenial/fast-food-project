@@ -32,15 +32,9 @@
                     <p class="card-text text-danger fw-bold">{{ number_format($row->price, 0, ",", ".") }}đ</p>
                 </div>
                 <div class="d-flex justify-content-center mb-3"> 
-                    <div class="button">
-                        <div class="button-wrapper">
-                            <div class="text">Thêm vào giỏ hàng</div>
-                            <span class="icon">
-                                <svg viewBox="0 0 16 16" class="bi bi-cart2" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"></path>
-                                </svg>
-                            </span>
-                        </div>
+                    <div class="order">
+                        <input type="number" id='product-number' class="product-number" min="1" placeholder="Số lượng..." data-id="{{ $row->id }}">
+                        <button id="add-to-cart" class='btn-add-to-cart' data-id="{{ $row->id }}">ĐẶT HÀNG</button>
                     </div>
                 </div> 
             </div>
@@ -50,3 +44,31 @@
 </div>
 </div>
 @endsection
+
+<script>
+    $(document).ready(function(){
+
+        $('#add-to-cart').click(function(){
+            var id = $(this).data('id');
+        var num = $(this).siblings('.product-number').val();
+            $.ajax({
+                type:"POST",
+                dataType: "json",
+                url: "{{route('cartadd')}}",
+                data:{"_token": "{{ csrf_token() }}", "id": id, "num":num},
+                beforeSend:function(){
+
+                },
+                success: function(data){
+                    $("$cart-number-product").html(data);
+                },
+                error: function(xhr, status, error){
+
+                },
+                complete: function(xhr, status){
+
+                }
+            });
+        });
+    });
+</script>

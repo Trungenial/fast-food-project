@@ -88,7 +88,7 @@ Route::prefix('admin')->group(function () {
     });
 });
 
-Route::get('/menu','App\Http\Controllers\MenuControllers@menu');
+Route::get('/menu','App\Http\Controllers\MenuControllers@menu')->name('menu');
 
 Route::get('/menu','App\Http\Controllers\MenuControllers@index');
 Route::get('/menu/category/{id}','App\Http\Controllers\MenuControllers@category');
@@ -98,3 +98,9 @@ Route::get('/thong-tin/{slug}', [FooterController::class, 'show'])->name('footer
 require __DIR__.'/auth.php';
 
 Route::get('/policy','App\Http\Controllers\HomeControllers@policy');
+
+Route::get('vieworder', 'App\Http\Controllers\CartControllers@vieworder')->name('vieworder');
+
+Route::get('/order', 'App\Http\Controllers\CartControllers@order')->name('order');
+
+Route::post('/cart/add','App\Http\Controllers\CartControllers@cartadd')->name('cartadd');
