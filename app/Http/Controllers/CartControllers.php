@@ -34,7 +34,8 @@ class CartControllers extends Controller
             $cart[$id] = $num ;
         }
         session()->put("cart",$cart);
-        return count($cart);
+        $totalItems = array_sum($cart); 
+        return response()->json($totalItems); 
     }
 
     public function order()

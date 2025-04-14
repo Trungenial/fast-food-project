@@ -6,6 +6,7 @@
 @endsection
 
 @section('content')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <div class="content-background">
 <div class="category-menu">
     <a href="{{ url('/menu') }}"
@@ -31,9 +32,11 @@
                     <h6 class="card-title">{{ $row->name }}</h6>
                     <p class="card-text text-danger fw-bold">{{ number_format($row->price, 0, ",", ".") }}đ</p>
                 </div>
+                <label>Số lượng</label>
                 <div class="d-flex justify-content-center mb-3"> 
+
                     <div class="order">
-                        <input type="number" id='product-number' class="product-number" min="1" placeholder="Số lượng..." data-id="{{ $row->id }}">
+                        <input type="number" class="product-number" min="1" value=1>
                         <button id="add-to-cart" class='btn-add-to-cart' data-id="{{ $row->id }}">ĐẶT HÀNG</button>
                     </div>
                 </div> 
@@ -44,31 +47,34 @@
 </div>
 </div>
 @endsection
-
+@section('js')
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
+    // Gắn sự kiện click cho tất cả các nút có class .btn-add-to-cart
+    $('.btn-add-to-cart').click(function () {
+        let id = $(this).data('id');
+        let num = $(this).closest('.card').find('.product-number').val();
 
-        $('#add-to-cart').click(function(){
-            var id = $(this).data('id');
-        var num = $(this).siblings('.product-number').val();
-            $.ajax({
-                type:"POST",
-                dataType: "json",
-                url: "{{route('cartadd')}}",
-                data:{"_token": "{{ csrf_token() }}", "id": id, "num":num},
-                beforeSend:function(){
 
-                },
-                success: function(data){
-                    $("$cart-number-product").html(data);
-                },
-                error: function(xhr, status, error){
 
-                },
-                complete: function(xhr, status){
-
-                }
-            });
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "{{ route('cartadd') }}",
+            data: {
+                _token: $('meta[name="csrf-token"]').attr('content'),
+                id: id,
+                num: num
+            },
+            success: function (data) {
+                $('#cart-number-product').html(data);
+                alert("Đã thêm vào giỏ hàng!");
+            },
+            error: function (xhr) {
+            }
         });
     });
+});
+
 </script>
+@endsection
