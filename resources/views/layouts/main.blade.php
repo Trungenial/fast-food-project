@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    {{-- <link rel="stylesheet" href="{{ asset('css/main_style.css') }}"> --}}
+    {{--
+    <link rel="stylesheet" href="{{ asset('css/main_style.css') }}"> --}}
 
     <link rel="stylesheet" href="{{ asset('css/home_style.css') }}">
     <script src="{{ asset('js/script.js') }}"></script>
@@ -54,8 +55,8 @@
 <body>
     <div class="dashboard-sidebar">
 
-        <a href="{{ url('/home') }}" class="active"><img src="{{ asset('images/Jollibee_logo2.png') }}"
-                alt="Brand Logo" class="brand-logo"></a>
+        <a href="{{ url('/home') }}" class="active"><img src="{{ asset('images/Jollibee_logo2.png') }}" alt="Brand Logo"
+                class="brand-logo"></a>
         <div class='dashboard-nav-dropdown'>
             <a href="#" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fas fa-utensils"></i>
                 DANH
@@ -74,8 +75,7 @@
             </div>
         </div>
         <div class='dashboard-nav-dropdown'>
-            <a href="#" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i
-                    class="fas fa-info-circle"></i> VỀ
+            <a href="#" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fas fa-info-circle"></i> VỀ
                 JOLLIBEE </a>
             <div class='dashboard-nav-dropdown-menu'>
                 <a href="#" class="dashboard-nav-dropdown-item">Câu Chuyện Của Chúng Tôi</a>
@@ -121,12 +121,11 @@
                     </a>
                     <a href="{{ url('/khuyen-mai') }}"
                         class="{{ request()->is('khuyen-mai') ? 'active' : '' }}"><span>KHUYẾN MÃI</span></a>
-                    <a href="{{ url('/dich-vu-tiec') }}"
-                        class="{{ request()->is('dich-vu-tiec') ? 'active' : '' }}"><span>DỊCH VỤ TIỆC</span></a>
+                    <a href="{{ url('/dich-vu') }}"
+                        class="{{ request()->is('dich-vu-tiec') ? 'active' : '' }}"><span>DỊCH VỤ</span></a>
                     <a href="{{ url('/store') }}" class="{{ request()->is('store') ? 'active' : '' }}"><span>HỆ
                             THỐNG NHÀ HÀNG</span></a>
-                    <a href="{{ url('/contact') }}"
-                        class="{{ request()->is('contact') ? 'active' : '' }}"><span>LIÊN
+                    <a href="{{ url('/contact') }}" class="{{ request()->is('contact') ? 'active' : '' }}"><span>LIÊN
                             HỆ</span></a>
                     <a href="{{ url('/tuyen-dung') }}"
                         class="{{ request()->is('tuyen-dung') ? 'active' : '' }}"><span>TUYỂN DỤNG</span></a>
@@ -143,45 +142,47 @@
             </div>
             <div class="toolbar-right">
                 @auth
-                <div class="dropdown d-inline-block">
-                    <button type="button" class="btn btn-danger dropdown-toggle fw-bold text-white px-3 py-2" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user-circle me-2"></i> {{ Auth::user()->name }}
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end shadow">
-                        <li>
-                            <a class="dropdown-item text-dark" href="{{ route('account') }}">
-                                <i class="fas fa-user-cog me-2 text-primary"></i> Quản lý tài khoản
-                            </a>
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item text-dark" href="{{ route('myorders') }}">
-                                <i class="fas fa-receipt me-2 text-success"></i> Đơn hàng của tôi
-                            </a>
-                        </li>
-
-                        <li>
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <a class="dropdown-item text-danger" href="#" onclick="event.preventDefault(); this.closest('form').submit();">
-                                    <i class="fas fa-sign-out-alt me-2"></i> Đăng xuất
+                    <div class="dropdown d-inline-block">
+                        <button type="button" class="btn btn-danger dropdown-toggle fw-bold text-white px-3 py-2"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user-circle me-2"></i> {{ Auth::user()->name }}
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow">
+                            <li>
+                                <a class="dropdown-item text-dark" href="{{ route('account') }}">
+                                    <i class="fas fa-user-cog me-2 text-primary"></i> Quản lý tài khoản
                                 </a>
-                            </form>
-                        </li>
+                            </li>
 
-                    </ul>
-                </div>
+                            <li>
+                                <a class="dropdown-item text-dark" href="{{ route('myorders') }}">
+                                    <i class="fas fa-receipt me-2 text-success"></i> Đơn hàng của tôi
+                                </a>
+                            </li>
+
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <a class="dropdown-item text-danger" href="#"
+                                        onclick="event.preventDefault(); this.closest('form').submit();">
+                                        <i class="fas fa-sign-out-alt me-2"></i> Đăng xuất
+                                    </a>
+                                </form>
+                            </li>
+
+                        </ul>
+                    </div>
                 @else
-                <a href="{{ route('login') }}">
-                    <button class="btn btn-outline-light text-dark fw-bold me-2">
-                        <i class="fas fa-sign-in-alt me-1"></i> Đăng nhập
-                    </button>
-                </a>
-                <a href="{{ route('register') }}">
-                    <button class="btn btn-warning fw-bold text-red-700">
-                        <i class="fas fa-user-plus me-1"></i> Đăng ký
-                    </button>
-                </a>
+                    <a href="{{ route('login') }}">
+                        <button class="btn btn-outline-light text-dark fw-bold me-2">
+                            <i class="fas fa-sign-in-alt me-1"></i> Đăng nhập
+                        </button>
+                    </a>
+                    <a href="{{ route('register') }}">
+                        <button class="btn btn-warning fw-bold text-red-700">
+                            <i class="fas fa-user-plus me-1"></i> Đăng ký
+                        </button>
+                    </a>
                 @endauth
             </div>
 
@@ -208,8 +209,8 @@
                     <p><strong>GIAO HÀNG TẬN NƠI</strong></p>
                     <p class="hotline"><i class="fas fa-phone"></i> 1900-1533</p>
                     <ul>
-                        <li><a href="{{ url('/contact') }}"
-                                class="{{ request()->is('contact') ? 'active' : '' }}">Liên hệ</a></li>
+                        <li><a href="{{ url('/contact') }}" class="{{ request()->is('contact') ? 'active' : '' }}">Liên
+                                hệ</a></li>
                         <li><a href="{{ route('footer.show', 'chinh-sach-quy-dinh-chung') }}">Chính sách & quy
                                 định chung</a></li>
                         <li><a href="{{ route('footer.show', 'chinh-sach-thanh-toan') }}">Chính sách thanh
