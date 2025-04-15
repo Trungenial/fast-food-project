@@ -6,6 +6,9 @@
 @endsection
 
 @section('content')
+@if(isset($status))
+    <div class="alert alert-success">{{ $status }}</div>
+@endif
 <div class="content-background">
     <div class="category-menu">
         <a href="{{ url('/menu') }}"

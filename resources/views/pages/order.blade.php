@@ -8,6 +8,7 @@ $phoneVal = auth()->check() ? auth()->user()->phone : '';
 
 @extends('layouts.main')
 @section('title', 'Giỏ hàng')
+
 @section('css')
 <style>
     body {
@@ -111,10 +112,17 @@ $phoneVal = auth()->check() ? auth()->user()->phone : '';
 @endsection
 @section('content')
 
+
 <div class="container mt-4">
     <h5 class="mb-3">GIỎ HÀNG CỦA BẠN</h5>
+    @if (session('status'))
+    <div class="alert alert-success">
+      {{ session('status') }}
+    </div>
+    @endif
     @if (count($items) === 0)
     <div class="alert alert-warning">Giỏ hàng của bạn đang trống.</div>
+    
     @else
     <table class="table table-bordered align-middle text-center">
         <thead class="table-light">
@@ -169,8 +177,6 @@ $phoneVal = auth()->check() ? auth()->user()->phone : '';
                     <option value="{{ $province->code }}" {{ $provinceVal == $province->name ? 'selected' : '' }}>
                         {{ $province->name }}
                     </option>
-
-
 
                     @endforeach
                 </select>
@@ -229,11 +235,13 @@ $phoneVal = auth()->check() ? auth()->user()->phone : '';
                 @auth
                 <button type="submit" class="btn btn-jolli">Đặt hàng</button>
                 @else
-                <a href="{{ route('login') }}" class="btn btn-warning">Đăng nhập để đặt hàng</a>
+                <a href="{{ route('login') }}" class="btn btn-warning">Đăng nhập để đặt hàng</a><br><br>
+                <a href="{{ route('nologin') }}" class="btn btn-outline-warning">Đặt hàng không cần đăng nhập</a>
                 @endauth
             </div>
         </div>
     </form>
+
 
     @endif
 </div>

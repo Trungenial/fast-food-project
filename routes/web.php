@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\FooterController;
+use App\Http\Controllers\NoLoginController;
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
@@ -65,7 +66,7 @@ Route::get('/store', 'App\Http\Controllers\StoreControllers@store');
 Route::resource('categories', CategoryController::class);
 Route::resource('products', ProductController::class);
 
-Route::get('/menu', 'App\Http\Controllers\MenuControllers@menu');
+Route::get('/menu', 'App\Http\Controllers\MenuControllers@menu')->name('menu');
 
 Route::get('/menu', 'App\Http\Controllers\MenuControllers@index');
 Route::get('/menu/category/{id}', 'App\Http\Controllers\MenuControllers@category');
@@ -142,4 +143,11 @@ Route::get('/thong-tin/{slug}', [FooterController::class, 'show'])->name('footer
 require __DIR__.'/auth.php';
 
 Route::get('/policy','App\Http\Controllers\HomeControllers@policy');
+
+Route::get('nologin','App\Http\Controllers\NoLoginController@nologin')->name('nologin');
+
+Route::post('/dat-hang', [NoLoginController::class, 'create_order'])->name('create-order');
+
+
 Route::get('/testemail','App\Http\Controllers\MailController@testemail');
+
