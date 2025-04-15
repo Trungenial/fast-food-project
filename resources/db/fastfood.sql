@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 15, 2025 at 06:37 AM
+-- Generation Time: Apr 15, 2025 at 07:54 AM
 -- Server version: 9.1.0
 -- PHP Version: 8.3.14
 
@@ -125,6 +125,14 @@ CREATE TABLE IF NOT EXISTS `cache` (
   `expiration` int NOT NULL,
   PRIMARY KEY (`key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cache`
+--
+
+INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
+('laravel_cache_trung@gmail.com|127.0.0.1', 'i:1;', 1744699795),
+('laravel_cache_trung@gmail.com|127.0.0.1:timer', 'i:1744699795;', 1744699795);
 
 -- --------------------------------------------------------
 
@@ -996,18 +1004,18 @@ CREATE TABLE IF NOT EXISTS `orders` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `orders_ibfk_2` (`store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `orders`
 --
 
 INSERT INTO `orders` (`id`, `user_id`, `store_id`, `shipping_address`, `receiver_phone`, `total_price`, `status`, `created_at`, `updated_at`) VALUES
-(10, 11, 4, NULL, NULL, 395000.00, 'processing', '2025-04-14 00:36:29', '2025-04-14 00:36:29'),
-(11, 11, 3, NULL, NULL, 1124000.00, 'processing', '2025-04-14 00:39:10', '2025-04-14 00:39:10'),
-(12, 11, 2, NULL, NULL, 1086000.00, 'processing', '2025-04-15 00:45:50', '2025-04-15 01:35:57'),
+(10, 11, 4, NULL, NULL, 395000.00, 'processing', '2025-01-14 00:36:29', '2025-04-15 07:53:06'),
+(11, 11, 3, NULL, NULL, 1124000.00, 'processing', '2025-02-14 00:39:10', '2025-04-15 07:53:03'),
+(12, 11, 2, NULL, NULL, 1086000.00, 'processing', '2025-03-15 00:45:50', '2025-04-15 07:52:57'),
 (13, 12, 1, NULL, NULL, 392000.00, 'processing', '2025-04-16 00:51:30', '2025-04-15 01:36:02'),
-(14, 13, 4, 'Hồ Chí Minh', NULL, 712000.00, 'completed', '2025-04-17 01:33:30', '2025-04-14 22:16:51');
+(14, 13, 4, 'Hồ Chí Minh', NULL, 712000.00, 'completed', '2025-05-17 01:33:30', '2025-04-15 07:53:40');
 
 -- --------------------------------------------------------
 
@@ -1425,7 +1433,7 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('dG5jaWkcurmkijHxbxXlyJ9AQM6wn0wpvHeIWkUw', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 Edg/135.0.0.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiM0FUSGFaNFF2aE9SekFEODA0WkdDSERoQlFHV3JVTjFTVE1EMDlTbiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDg6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9vcmRlcnMtd2l0aG91dC1sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTI6ImxvZ2luX2FkbWluXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjQ6ImNhcnQiO2E6MTp7aTo1O2k6Mzt9fQ==', 1744698980);
+('q8wUIC2I4xKpX3vGdoeiGXzS9pOqkppq2Un3lq5L', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 Edg/135.0.0.0', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiM0FUSGFaNFF2aE9SekFEODA0WkdDSERoQlFHV3JVTjFTVE1EMDlTbiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9kYXNoYm9hcmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUyOiJsb2dpbl9hZG1pbl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czo0OiJjYXJ0IjthOjE6e2k6NTtpOjM7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE0O30=', 1744703638);
 
 -- --------------------------------------------------------
 
@@ -1480,7 +1488,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `birthday` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
@@ -1489,7 +1497,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `phone`, `address`, `province`, `district`, `ward`, `role`, `email_verified_at`, `remember_token`, `created_at`, `updated_at`, `gender`, `birthday`) VALUES
 (11, 'Phạm Văn Tuấn', 'pvtuan280803@gmail.com', '$2y$12$nV8wEg3Aj8nTcqlwxvbNh.XVYcfQCI5fZ.BpBEgmnlvXp2CW4dPAW', '0374195903', '56 Hoàng Diệu 2', 'Hà Giang', 'Đồng Văn', 'Lũng Cú', 'customer', NULL, NULL, '2025-04-13 23:11:51', '2025-04-13 23:11:51', 'Nam', '2003-08-14'),
 (12, 'Phạm Văn Tuấn', 'vietdq.ieit@gmail.com', '$2y$12$TCSRAQCtbS93jkhlUU8MyOzQxVtTDcQ7ORq./I6Hrt4VPv6aepOw2', '0374195903', '56 Hoàng Diệu 2', 'Hồ Chí Minh', 'Thủ Đức', 'Linh Chiểu', 'customer', NULL, NULL, '2025-04-14 00:50:55', '2025-04-14 00:50:55', 'Nam', '2025-04-18'),
-(13, 'Phạm Văn Tuấn', '030238220290@st.buh.edu.vn', '$2y$12$WMUEgvzEqdppOyf8QVPsM./YkTvZy3ifyTWzN71FcLxI.1IBouskq', '0374195903', '56 Hoàng Diệu 2', 'Hà Nội', 'Sơn Tây', 'Trung Sơn Trầm', 'customer', NULL, NULL, '2025-04-14 01:33:21', '2025-04-14 01:33:21', 'Nam', '2025-04-02');
+(13, 'Phạm Văn Tuấn', '030238220290@st.buh.edu.vn', '$2y$12$WMUEgvzEqdppOyf8QVPsM./YkTvZy3ifyTWzN71FcLxI.1IBouskq', '0374195903', '56 Hoàng Diệu 2', 'Hà Nội', 'Sơn Tây', 'Trung Sơn Trầm', 'customer', NULL, NULL, '2025-04-14 01:33:21', '2025-04-14 01:33:21', 'Nam', '2025-04-02'),
+(14, 'Ben Gan', 'transytrung5@gmail.com', '$2y$12$i0Dvk47mFvujVTS4iGR8LOSTtfhj3fmV11vuwmHRNS654Qy1fRvcy', '000000021212', 'Phương Linh Chiểu', 'Hà Nội', 'Thanh Trì', 'Vĩnh Quỳnh', 'customer', NULL, NULL, '2025-04-14 23:50:51', '2025-04-14 23:50:51', 'Nam', '2025-03-31');
 
 -- --------------------------------------------------------
 
