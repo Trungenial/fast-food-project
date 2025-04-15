@@ -43,22 +43,22 @@ class HomeControllers extends Controller
             [
                 'image' => 'https://ext.same-assets.com/2633368737/1638698690.png',
                 'alt' => 'Gà Giòn Vui Vẻ',
-                'link' => '#'
+                'link' => 'menu/category/2'
             ],
             [
                 'image' => 'https://ext.same-assets.com/2633368737/3212333748.png',
                 'alt' => 'Gà Sốt Cay',
-                'link' => '#'
+                'link' => 'menu/category/4'
             ],
             [
                 'image' => 'https://ext.same-assets.com/2633368737/723302826.png',
-                'alt' => 'Mỳ Ý Sốt Bò Bằm',
-                'link' => '#'
+                'alt' => 'Mì Ý sốt bò bằm',
+                'link' => 'menu/category/3'
             ],
             [
                 'image' => 'https://ext.same-assets.com/2633368737/2428134458.png',
                 'alt' => 'Món Tráng Miệng',
-                'link' => '#'
+                'link' => 'menu/category/7'
             ]
         ];
 
@@ -68,7 +68,7 @@ class HomeControllers extends Controller
             [
                 'image' => 'laytaicuahang.png',
                 'title' => 'LẤY TẠI CỬA HÀNG',
-                'link' => '#'
+                'link' => '/store'
             ],
             [
                 'image' => 'dattiecsinhnhat.png',

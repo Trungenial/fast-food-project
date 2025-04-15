@@ -24,7 +24,7 @@
 
         <!-- Order Now Call-to-Action -->
         <div class="order-now-cta">
-            <a href="#" class="order-button">ĐẶT HÀNG</a>
+            <a href="{{ url('/menu') }}" class="order-button">ĐẶT HÀNG</a>
         </div>
 
         <!-- Menu Categories -->
@@ -35,7 +35,7 @@
             </div>
             <div class="menu-categories">
                 @foreach ($categoryItems as $item)
-                    <a href="{{ $item['link'] }}" class="category-item">
+                    <a href="{{ url($item['link']) }}" class="category-item">
                         <img src="{{ $item['image'] }}" alt="{{ $item['alt'] }}">
                     </a>
                 @endforeach
@@ -53,7 +53,7 @@
                     <div class="service-item">
                         <img src="{{ asset('images/home/dv/' . $service['image']) }}" alt="{{ $service['title'] }}">
                         <h3>{{ $service['title'] }}</h3>
-                        <a href="{{ $service['link'] }}" class="service-button">XEM THÊM</a>
+                        <a href="{{ url($service['link']) }}" class="service-button">XEM THÊM</a>
                     </div>
                 @endforeach
             </div>
@@ -86,7 +86,8 @@
                 <select class="store-district">
                     <option>Chọn Quận/Huyện</option>
                 </select>
-                <button class="search-button">TÌM KIẾM</button>
+                <a href="{{ url('/store') }}"><button class="search-button">TÌM KIẾM</button></a>
+
             </div>
         </div>
 
