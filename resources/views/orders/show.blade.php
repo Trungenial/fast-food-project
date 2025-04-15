@@ -1,32 +1,35 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h3>Chi tiết đơn hàng #{{ $order->id }}</h3>
-    <table class="table">
-        <tr>
-            <th>Tên người đặt</th>
-            <td>{{ $order->user_name }}</td>
-        </tr>
-        <tr>
-            <th>Địa chỉ giao hàng</th>
-            <td>{{ $order->shipping_address }}</td>
-        </tr>
-        <tr>
-            <th>Số điện thoại</th>
-            <td>{{ $order->receiver_phone }}</td>
-        </tr>
-        <tr>
-            <th>Tổng giá</th>
-            <td>{{ number_format($order->total_price, 2) }} VND</td>
-        </tr>
-        <tr>
-            <th>Trạng thái</th>
-            <td>{{ ucfirst($order->status) }}</td>
-        </tr>
-        <tr>
-            <th>Ngày tạo</th>
-            <td>{{ $order->created_at }}</td>
-        </tr>
-    </table>
-    <a href="{{ route('orders.index') }}" class="btn btn-primary">Quay lại danh sách đơn hàng</a>
+    <div class="container">
+        <h1>Order Details - Order #{{ $order[0]->id }}</h1>
+
+        <p><strong>Customer Name:</strong> {{ $order[0]->user_name }}</p>
+        <p><strong>Order Date:</strong> {{ $order[0]->created_at }}</p>
+        <p><strong>Shipping Address:</strong> {{ $order[0]->shipping_address }}</p>
+        <p><strong>Receiver Phone:</strong> {{ $order[0]->receiver_phone }}</p>
+        <p><strong>Status:</strong> {{ ucfirst($order[0]->status) }}</p>
+
+        <h3>Order Items:</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($order as $item)
+                    <tr>
+                        <td>{{ $item->product_name }}</td>
+                        <td>{{ $item->quantity }}</td>
+                        <td>{{ $item->product_price }}</td>
+                        <td>{{ $item->quantity * $item->product_price }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 @endsection
