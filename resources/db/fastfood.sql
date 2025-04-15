@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 14, 2025 at 11:53 PM
+-- Generation Time: Apr 15, 2025 at 04:57 AM
 -- Server version: 9.1.0
 -- PHP Version: 8.3.14
 
@@ -1004,9 +1004,9 @@ CREATE TABLE IF NOT EXISTS `orders` (
 INSERT INTO `orders` (`id`, `user_id`, `store_id`, `shipping_address`, `receiver_phone`, `total_price`, `status`, `created_at`, `updated_at`) VALUES
 (10, 11, 4, NULL, NULL, 395000.00, 'processing', '2025-04-14 00:36:29', '2025-04-14 00:36:29'),
 (11, 11, 3, NULL, NULL, 1124000.00, 'processing', '2025-04-14 00:39:10', '2025-04-14 00:39:10'),
-(12, 11, 2, NULL, NULL, 1086000.00, 'processing', '2025-04-14 00:45:50', '2025-04-14 00:45:50'),
-(13, 12, 1, NULL, NULL, 392000.00, 'processing', '2025-04-14 00:51:30', '2025-04-14 00:51:30'),
-(14, 13, 4, NULL, NULL, 712000.00, 'processing', '2025-04-14 01:33:30', '2025-04-14 01:33:30');
+(12, 11, 2, NULL, NULL, 1086000.00, 'processing', '2025-04-15 00:45:50', '2025-04-15 01:35:57'),
+(13, 12, 1, NULL, NULL, 392000.00, 'processing', '2025-04-16 00:51:30', '2025-04-15 01:36:02'),
+(14, 13, 4, 'Hồ Chí Minh', NULL, 712000.00, 'processing', '2025-04-17 01:33:30', '2025-04-14 21:53:53');
 
 -- --------------------------------------------------------
 
@@ -1352,7 +1352,7 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('i5JiTCaG7Rd020Zq7vkfNFn8vA4BAbxCYo7JMg05', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 Edg/135.0.0.0', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiYzFNaUxqVHZKd3hrODRCWFRHNWRVY3labEc3VlBYNlc4d0VGQ0JQSSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9kYXNoYm9hcmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjQ6ImNhcnQiO2E6MTp7aTo0O2k6MTt9czozOiJ1cmwiO2E6MDp7fXM6NTI6ImxvZ2luX2FkbWluXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1744657963);
+('dG5jaWkcurmkijHxbxXlyJ9AQM6wn0wpvHeIWkUw', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 Edg/135.0.0.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiM0FUSGFaNFF2aE9SekFEODA0WkdDSERoQlFHV3JVTjFTVE1EMDlTbiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDI6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9vcmRlcnMvMTQvZWRpdCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTI6ImxvZ2luX2FkbWluXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjQ6ImNhcnQiO2E6MTp7aTo1O2k6Mzt9fQ==', 1744692860);
 
 -- --------------------------------------------------------
 
@@ -11509,6 +11509,14 @@ ALTER TABLE `categories`
   ADD CONSTRAINT `categories_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `categories` (`id`) ON DELETE SET NULL;
 
 --
+-- Constraints for table `districts`
+--
+ALTER TABLE `districts`
+  ADD CONSTRAINT `districts_ibfk_1` FOREIGN KEY (`province_code`) REFERENCES `provinces` (`code`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_district_administrative_region` FOREIGN KEY (`administrative_unit_id`) REFERENCES `administrative_units` (`id`),
+  ADD CONSTRAINT `fk_district_administrative_unit` FOREIGN KEY (`administrative_unit_id`) REFERENCES `administrative_units` (`id`);
+
+--
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
@@ -11541,11 +11549,25 @@ ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE;
 
 --
+-- Constraints for table `provinces`
+--
+ALTER TABLE `provinces`
+  ADD CONSTRAINT `fk_provinces_administrative_region` FOREIGN KEY (`administrative_region_id`) REFERENCES `administrative_regions` (`id`),
+  ADD CONSTRAINT `fk_provinces_administrative_unit` FOREIGN KEY (`administrative_unit_id`) REFERENCES `administrative_units` (`id`);
+
+--
 -- Constraints for table `reviews`
 --
 ALTER TABLE `reviews`
   ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `wards`
+--
+ALTER TABLE `wards`
+  ADD CONSTRAINT `fk_wards_administrative_unit` FOREIGN KEY (`administrative_unit_id`) REFERENCES `administrative_units` (`id`),
+  ADD CONSTRAINT `wards_ibfk_1` FOREIGN KEY (`district_code`) REFERENCES `districts` (`code`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
