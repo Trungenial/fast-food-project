@@ -18,6 +18,8 @@
 
                 <p class="mb-1"><strong>Trạng thái:</strong> {{ $order->status }}</p>
                 <p class="mb-3"><strong>Tổng tiền:</strong> <span class="text-danger">{{ number_format($order->total_price, 0, ',', '.') }}đ</span></p>
+                <p><strong>Địa chỉ giao hàng:</strong> {{ $order->shipping_address }}</p>
+
 
                 <ul class="list-group">
                     @foreach ($order->items as $item)
