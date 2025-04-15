@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1:3306
--- Thời gian đã tạo: Th4 15, 2025 lúc 09:11 AM
--- Phiên bản máy phục vụ: 9.1.0
--- Phiên bản PHP: 8.3.14
+-- Host: 127.0.0.1:3306
+-- Generation Time: Apr 15, 2025 at 12:43 AM
+-- Server version: 9.1.0
+-- PHP Version: 8.3.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `fastfood`
+-- Database: `fastfood`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `administrative_regions`
+-- Table structure for table `administrative_regions`
 --
 
 DROP TABLE IF EXISTS `administrative_regions`;
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `administrative_regions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `administrative_regions`
+-- Dumping data for table `administrative_regions`
 --
 
 INSERT INTO `administrative_regions` (`id`, `name`, `name_en`, `code_name`, `code_name_en`) VALUES
@@ -54,7 +54,7 @@ INSERT INTO `administrative_regions` (`id`, `name`, `name_en`, `code_name`, `cod
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `administrative_units`
+-- Table structure for table `administrative_units`
 --
 
 DROP TABLE IF EXISTS `administrative_units`;
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `administrative_units` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `administrative_units`
+-- Dumping data for table `administrative_units`
 --
 
 INSERT INTO `administrative_units` (`id`, `full_name`, `full_name_en`, `short_name`, `short_name_en`, `code_name`, `code_name_en`) VALUES
@@ -88,7 +88,7 @@ INSERT INTO `administrative_units` (`id`, `full_name`, `full_name_en`, `short_na
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `admins`
+-- Table structure for table `admins`
 --
 
 DROP TABLE IF EXISTS `admins`;
@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `admins` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `admins`
+-- Dumping data for table `admins`
 --
 
 INSERT INTO `admins` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
@@ -115,7 +115,7 @@ INSERT INTO `admins` (`id`, `name`, `email`, `password`, `remember_token`, `crea
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `cache`
+-- Table structure for table `cache`
 --
 
 DROP TABLE IF EXISTS `cache`;
@@ -129,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `cache` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `cache_locks`
+-- Table structure for table `cache_locks`
 --
 
 DROP TABLE IF EXISTS `cache_locks`;
@@ -143,7 +143,7 @@ CREATE TABLE IF NOT EXISTS `cache_locks` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `categories`
+-- Table structure for table `categories`
 --
 
 DROP TABLE IF EXISTS `categories`;
@@ -156,7 +156,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `categories`
+-- Dumping data for table `categories`
 --
 
 INSERT INTO `categories` (`id`, `name`, `parent_id`) VALUES
@@ -172,7 +172,7 @@ INSERT INTO `categories` (`id`, `name`, `parent_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `districts`
+-- Table structure for table `districts`
 --
 
 DROP TABLE IF EXISTS `districts`;
@@ -191,7 +191,7 @@ CREATE TABLE IF NOT EXISTS `districts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `districts`
+-- Dumping data for table `districts`
 --
 
 INSERT INTO `districts` (`code`, `name`, `name_en`, `full_name`, `full_name_en`, `code_name`, `province_code`, `administrative_unit_id`) VALUES
@@ -896,7 +896,7 @@ INSERT INTO `districts` (`code`, `name`, `name_en`, `full_name`, `full_name_en`,
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `failed_jobs`
+-- Table structure for table `failed_jobs`
 --
 
 DROP TABLE IF EXISTS `failed_jobs`;
@@ -915,7 +915,7 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `jobs`
+-- Table structure for table `jobs`
 --
 
 DROP TABLE IF EXISTS `jobs`;
@@ -934,7 +934,7 @@ CREATE TABLE IF NOT EXISTS `jobs` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `job_batches`
+-- Table structure for table `job_batches`
 --
 
 DROP TABLE IF EXISTS `job_batches`;
@@ -955,7 +955,7 @@ CREATE TABLE IF NOT EXISTS `job_batches` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `migrations`
+-- Table structure for table `migrations`
 --
 
 DROP TABLE IF EXISTS `migrations`;
@@ -967,7 +967,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `migrations`
+-- Dumping data for table `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -978,7 +978,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `orders`
+-- Table structure for table `orders`
 --
 
 DROP TABLE IF EXISTS `orders`;
@@ -998,7 +998,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `orders`
+-- Dumping data for table `orders`
 --
 
 INSERT INTO `orders` (`id`, `user_id`, `store_id`, `shipping_address`, `receiver_phone`, `total_price`, `status`, `created_at`, `updated_at`) VALUES
@@ -1011,7 +1011,7 @@ INSERT INTO `orders` (`id`, `user_id`, `store_id`, `shipping_address`, `receiver
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `order_items`
+-- Table structure for table `order_items`
 --
 
 DROP TABLE IF EXISTS `order_items`;
@@ -1027,7 +1027,7 @@ CREATE TABLE IF NOT EXISTS `order_items` (
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `order_items`
+-- Dumping data for table `order_items`
 --
 
 INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`, `price`) VALUES
@@ -1049,7 +1049,7 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`, `price`) 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `password_reset_tokens`
+-- Table structure for table `password_reset_tokens`
 --
 
 DROP TABLE IF EXISTS `password_reset_tokens`;
@@ -1061,7 +1061,7 @@ CREATE TABLE IF NOT EXISTS `password_reset_tokens` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `password_reset_tokens`
+-- Dumping data for table `password_reset_tokens`
 --
 
 INSERT INTO `password_reset_tokens` (`email`, `token`, `created_at`) VALUES
@@ -1070,7 +1070,7 @@ INSERT INTO `password_reset_tokens` (`email`, `token`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `payments`
+-- Table structure for table `payments`
 --
 
 DROP TABLE IF EXISTS `payments`;
@@ -1086,7 +1086,7 @@ CREATE TABLE IF NOT EXISTS `payments` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `payments`
+-- Dumping data for table `payments`
 --
 
 INSERT INTO `payments` (`id`, `order_id`, `method`, `status`, `transaction_id`, `created_at`) VALUES
@@ -1099,7 +1099,7 @@ INSERT INTO `payments` (`id`, `order_id`, `method`, `status`, `transaction_id`, 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `posts`
+-- Table structure for table `posts`
 --
 
 DROP TABLE IF EXISTS `posts`;
@@ -1118,7 +1118,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `products`
+-- Table structure for table `products`
 --
 
 DROP TABLE IF EXISTS `products`;
@@ -1136,7 +1136,7 @@ CREATE TABLE IF NOT EXISTS `products` (
 ) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `products`
+-- Dumping data for table `products`
 --
 
 INSERT INTO `products` (`id`, `name`, `description`, `price`, `image`, `category_id`, `created_at`, `updated_at`) VALUES
@@ -1204,7 +1204,7 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `image`, `category
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `promotions`
+-- Table structure for table `promotions`
 --
 
 DROP TABLE IF EXISTS `promotions`;
@@ -1222,7 +1222,7 @@ CREATE TABLE IF NOT EXISTS `promotions` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `provinces`
+-- Table structure for table `provinces`
 --
 
 DROP TABLE IF EXISTS `provinces`;
@@ -1241,7 +1241,7 @@ CREATE TABLE IF NOT EXISTS `provinces` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `provinces`
+-- Dumping data for table `provinces`
 --
 
 INSERT INTO `provinces` (`code`, `name`, `name_en`, `full_name`, `full_name_en`, `code_name`, `administrative_unit_id`, `administrative_region_id`) VALUES
@@ -1312,7 +1312,7 @@ INSERT INTO `provinces` (`code`, `name`, `name_en`, `full_name`, `full_name_en`,
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `reviews`
+-- Table structure for table `reviews`
 --
 
 DROP TABLE IF EXISTS `reviews`;
@@ -1331,7 +1331,7 @@ CREATE TABLE IF NOT EXISTS `reviews` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `sessions`
+-- Table structure for table `sessions`
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -1348,7 +1348,7 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `sessions`
+-- Dumping data for table `sessions`
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
@@ -1357,7 +1357,7 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `stores`
+-- Table structure for table `stores`
 --
 
 DROP TABLE IF EXISTS `stores`;
@@ -1372,7 +1372,7 @@ CREATE TABLE IF NOT EXISTS `stores` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `stores`
+-- Dumping data for table `stores`
 --
 
 INSERT INTO `stores` (`id`, `name`, `address`, `phone`, `latitude`, `longitude`) VALUES
@@ -1384,7 +1384,7 @@ INSERT INTO `stores` (`id`, `name`, `address`, `phone`, `latitude`, `longitude`)
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `users`
+-- Table structure for table `users`
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -1410,19 +1410,18 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `phone`, `address`, `province`, `district`, `ward`, `role`, `email_verified_at`, `remember_token`, `created_at`, `updated_at`, `gender`, `birthday`) VALUES
 (11, 'Phạm Văn Tuấn', 'pvtuan280803@gmail.com', '$2y$12$nV8wEg3Aj8nTcqlwxvbNh.XVYcfQCI5fZ.BpBEgmnlvXp2CW4dPAW', '0374195903', '56 Hoàng Diệu 2', 'Hà Giang', 'Đồng Văn', 'Lũng Cú', 'customer', NULL, NULL, '2025-04-13 23:11:51', '2025-04-13 23:11:51', 'Nam', '2003-08-14'),
 (12, 'Phạm Văn Tuấn', 'vietdq.ieit@gmail.com', '$2y$12$TCSRAQCtbS93jkhlUU8MyOzQxVtTDcQ7ORq./I6Hrt4VPv6aepOw2', '0374195903', '56 Hoàng Diệu 2', 'Hồ Chí Minh', 'Thủ Đức', 'Linh Chiểu', 'customer', NULL, NULL, '2025-04-14 00:50:55', '2025-04-14 00:50:55', 'Nam', '2025-04-18'),
-(13, 'Phạm Văn Tuấn', '030238220290@st.buh.edu.vn', '$2y$12$WMUEgvzEqdppOyf8QVPsM./YkTvZy3ifyTWzN71FcLxI.1IBouskq', '0374195903', '56 Hoàng Diệu 2', 'Hà Nội', 'Sơn Tây', 'Trung Sơn Trầm', 'customer', NULL, NULL, '2025-04-14 01:33:21', '2025-04-14 01:33:21', 'Nam', '2025-04-02'),
-(14, 'Phạm Văn Tuấn', 'husuobioyo@hotmail.com', '$2y$12$H9gJzftWLz9UCWIESzNfc.D92m3/4fQpaf2MTtn/3ZOv9v9zwIbTy', '0364626854', 'Bình Thới', 'Hà Nội', 'Hoàn Kiếm', 'Trần Hưng Đạo', 'customer', NULL, NULL, '2025-04-15 02:10:17', '2025-04-15 02:10:17', 'Nam', '2025-04-26');
+(13, 'Phạm Văn Tuấn', '030238220290@st.buh.edu.vn', '$2y$12$WMUEgvzEqdppOyf8QVPsM./YkTvZy3ifyTWzN71FcLxI.1IBouskq', '0374195903', '56 Hoàng Diệu 2', 'Hà Nội', 'Sơn Tây', 'Trung Sơn Trầm', 'customer', NULL, NULL, '2025-04-14 01:33:21', '2025-04-14 01:33:21', 'Nam', '2025-04-02');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `wards`
+-- Table structure for table `wards`
 --
 
 DROP TABLE IF EXISTS `wards`;
@@ -1441,7 +1440,7 @@ CREATE TABLE IF NOT EXISTS `wards` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `wards`
+-- Dumping data for table `wards`
 --
 
 INSERT INTO `wards` (`code`, `name`, `name_en`, `full_name`, `full_name_en`, `code_name`, `district_code`, `administrative_unit_id`) VALUES
@@ -11500,17 +11499,17 @@ INSERT INTO `wards` (`code`, `name`, `name_en`, `full_name`, `full_name_en`, `co
 ('32248', 'Đất Mũi', 'Dat Mui', 'Xã Đất Mũi', 'Dat Mui Commune', 'dat_mui', '973', 10);
 
 --
--- Các ràng buộc cho các bảng đã đổ
+-- Constraints for dumped tables
 --
 
 --
--- Các ràng buộc cho bảng `categories`
+-- Constraints for table `categories`
 --
 ALTER TABLE `categories`
   ADD CONSTRAINT `categories_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `categories` (`id`) ON DELETE SET NULL;
 
 --
--- Các ràng buộc cho bảng `districts`
+-- Constraints for table `districts`
 --
 ALTER TABLE `districts`
   ADD CONSTRAINT `districts_ibfk_1` FOREIGN KEY (`province_code`) REFERENCES `provinces` (`code`) ON DELETE CASCADE,
@@ -11518,53 +11517,53 @@ ALTER TABLE `districts`
   ADD CONSTRAINT `fk_district_administrative_unit` FOREIGN KEY (`administrative_unit_id`) REFERENCES `administrative_units` (`id`);
 
 --
--- Các ràng buộc cho bảng `orders`
+-- Constraints for table `orders`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`store_id`) REFERENCES `stores` (`id`);
 
 --
--- Các ràng buộc cho bảng `order_items`
+-- Constraints for table `order_items`
 --
 ALTER TABLE `order_items`
   ADD CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `order_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
 
 --
--- Các ràng buộc cho bảng `payments`
+-- Constraints for table `payments`
 --
 ALTER TABLE `payments`
   ADD CONSTRAINT `payments_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE;
 
 --
--- Các ràng buộc cho bảng `posts`
+-- Constraints for table `posts`
 --
 ALTER TABLE `posts`
   ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
--- Các ràng buộc cho bảng `products`
+-- Constraints for table `products`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE;
 
 --
--- Các ràng buộc cho bảng `provinces`
+-- Constraints for table `provinces`
 --
 ALTER TABLE `provinces`
   ADD CONSTRAINT `fk_provinces_administrative_region` FOREIGN KEY (`administrative_region_id`) REFERENCES `administrative_regions` (`id`),
   ADD CONSTRAINT `fk_provinces_administrative_unit` FOREIGN KEY (`administrative_unit_id`) REFERENCES `administrative_units` (`id`);
 
 --
--- Các ràng buộc cho bảng `reviews`
+-- Constraints for table `reviews`
 --
 ALTER TABLE `reviews`
   ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
 
 --
--- Các ràng buộc cho bảng `wards`
+-- Constraints for table `wards`
 --
 ALTER TABLE `wards`
   ADD CONSTRAINT `fk_wards_administrative_unit` FOREIGN KEY (`administrative_unit_id`) REFERENCES `administrative_units` (`id`),
