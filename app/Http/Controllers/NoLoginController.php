@@ -138,11 +138,11 @@ class NoLoginController extends Controller
         ->select('products.name', 'order_items.quantity', 'order_items.price')
         ->get();
 
-    // Gửi email bằng Mail class mới
         Mail::to($request->input('email'))->send(new OrderPlacedMailNoLogin($order, $items));
-        if(session()->forget('cart')){
-        return redirect()->route('home')->with('status', 'Đặt hàng thành công!');
-       }
+
+        session()->forget('cart');
+        $status="Đặt hàng thành công!";
+        return redirect()->route('order')->with('status',$status);
     }
 
     
