@@ -27,5 +27,11 @@
                 <i class="fas fa-shopping-cart me-2"></i>Orders
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link text-white {{ request()->routeIs('orders_without_login.*') ? 'bg-secondary rounded' : '' }}"
+                href="{{ route('orders_without_login.index') }}">
+                <i class="fas fa-user-slash me-2"></i>Orders without login
+            </a>
+        </li>
     </ul>
 </div>

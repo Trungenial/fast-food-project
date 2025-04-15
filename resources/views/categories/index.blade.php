@@ -58,9 +58,36 @@
             </table>
 
             {{-- Phân trang --}}
-            <div class="mt-4 d-flex justify-content-center">
-                {{ $categories->links() }}
-            </div>
+            @if ($categories->hasPages())
+                <div class="mt-4 d-flex justify-content-center">
+                    <nav aria-label="Order pagination">
+                        <ul class="pagination">
+                            {{-- Trang đầu --}}
+                            <li class="page-item {{ $categories->onFirstPage() ? 'disabled' : '' }}">
+                                <a class="page-link" href="{{ $categories->url(1) }}" aria-label="First">
+                                    ⏪ Trang đầu
+                                </a>
+                            </li>
+
+                            {{-- Phân trang mặc định --}}
+                            @foreach ($categories->getUrlRange(1, $categories->lastPage()) as $page => $url)
+                                <li class="page-item {{ $categories->currentPage() == $page ? 'active' : '' }}">
+                                    <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                </li>
+                            @endforeach
+
+                            {{-- Trang cuối --}}
+                            <li
+                                class="page-item {{ $categories->currentPage() == $categories->lastPage() ? 'disabled' : '' }}">
+                                <a class="page-link" href="{{ $categories->url($categories->lastPage()) }}"
+                                    aria-label="Last">
+                                    ⏩ Trang cuối
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            @endif
         </div>
     </div>
 @endsection
