@@ -119,6 +119,9 @@ Route::prefix('admin')->group(function () {
         Route::resource('categories', CategoryController::class);
         Route::resource('products', ProductController::class);
         Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+        Route::get('dashboard/revenue', [DashboardController::class, 'revenue'])->name('admin.dashboard.revenue');
+        Route::get('dashboard/top-products', [DashboardController::class, 'topProducts'])->name('admin.dashboard.topProducts');
+        Route::get('dashboard/top-stores', [DashboardController::class, 'topStores'])->name('admin.dashboard.topStores');
     });
 });
 

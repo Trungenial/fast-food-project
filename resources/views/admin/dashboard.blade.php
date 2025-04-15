@@ -1,51 +1,71 @@
-{{-- resources/views/admin/dashboard.blade.php --}}
 @extends('layouts.admin')
 
 @section('content')
     <div class="container">
-        <h2 class="text-2xl font-bold mb-4">Thống kê đơn hàng theo ngày</h2>
+        <h2 class="mb-4">Thống kê hệ thống</h2>
 
-        <canvas id="ordersChart" height="100"></canvas>
+        <div class="row text-center mb-4">
+            <div class="col-md-4">
+                <div class="card shadow p-3">
+                    <h5>Tổng doanh thu</h5>
+                    <p><strong>{{ number_format($totalRevenue) }} đ</strong></p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow p-3">
+                    <h5>Tổng đơn hàng</h5>
+                    <p><strong>{{ $totalOrders }}</strong></p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow p-3">
+                    <h5>Tổng người dùng</h5>
+                    <p><strong>{{ $totalUsers }}</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <canvas id="monthlyRevenueChart"></canvas>
+            </div>
+            <div class="col-md-6">
+                <canvas id="topProductsChart"></canvas>
+            </div>
+        </div>
     </div>
 @endsection
+
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        const ctx = document.getElementById('ordersChart').getContext('2d');
-
-        const ordersChart = new Chart(ctx, {
+        // Doanh thu theo tháng
+        const monthlyRevenueCtx = document.getElementById('monthlyRevenueChart').getContext('2d');
+        new Chart(monthlyRevenueCtx, {
             type: 'line',
             data: {
-                labels: @json($labels),
+                labels: {!! json_encode(array_map(fn($m) => "Tháng $m", array_keys($monthlyRevenue->toArray()))) !!},
                 datasets: [{
-                    label: 'Số đơn hàng',
-                    data: @json($data),
-                    backgroundColor: 'rgba(54, 162, 235, 0.3)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 2,
-                    fill: true,
-                    tension: 0.3,
+                    label: 'Doanh thu theo tháng',
+                    data: {!! json_encode(array_values($monthlyRevenue->toArray())) !!},
+                    borderColor: 'blue',
+                    fill: false,
+                    tension: 0.3
                 }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top'
-                    },
-                    title: {
-                        display: true,
-                        text: 'Biểu đồ đơn hàng theo ngày'
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            precision: 0
-                        }
-                    }
-                }
+            }
+        });
+
+        // Top sản phẩm bán chạy
+        const topProductsCtx = document.getElementById('topProductsChart').getContext('2d');
+        new Chart(topProductsCtx, {
+            type: 'bar',
+            data: {
+                labels: {!! json_encode(array_keys($topProducts->toArray())) !!},
+                datasets: [{
+                    label: 'Số lượng bán',
+                    data: {!! json_encode(array_values($topProducts->toArray())) !!},
+                    backgroundColor: 'orange'
+                }]
             }
         });
     </script>

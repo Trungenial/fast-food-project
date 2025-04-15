@@ -9,16 +9,37 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // Thống kê đơn hàng
-        $ordersByDate = DB::table('orders')
-            ->selectRaw('DATE(created_at) as date, COUNT(*) as total')
-            ->groupBy('date')
-            ->orderBy('date')
-            ->get();
+        // Tổng doanh thu
+        $totalRevenue = DB::table('orders')->sum('total_price');
 
-        $labels = $ordersByDate->pluck('date')->toArray();
-        $data = $ordersByDate->pluck('total')->toArray();
+        // Tổng đơn hàng
+        $totalOrders = DB::table('orders')->count();
 
-        return view('admin.dashboard', compact('labels', 'data'));
+        // Tổng số người dùng
+        $totalUsers = DB::table('users')->count();
+
+        // Doanh thu theo tháng
+        $monthlyRevenue = DB::table('orders')
+            ->selectRaw('MONTH(created_at) as month, SUM(total_price) as total')
+            ->groupBy('month')
+            ->orderBy('month')
+            ->pluck('total', 'month');
+
+        // Top 5 sản phẩm bán chạy
+        $topProducts = DB::table('order_items')
+            ->join('products', 'order_items.product_id', '=', 'products.id')
+            ->select('products.name', DB::raw('SUM(order_items.quantity) as total'))
+            ->groupBy('products.name')
+            ->orderByDesc('total')
+            ->limit(5)
+            ->pluck('total', 'products.name');
+
+        return view('admin.dashboard', compact(
+            'totalRevenue',
+            'totalOrders',
+            'totalUsers',
+            'monthlyRevenue',
+            'topProducts'
+        ));
     }
 }
