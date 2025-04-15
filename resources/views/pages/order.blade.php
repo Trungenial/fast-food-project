@@ -221,7 +221,7 @@ $phoneVal = auth()->check() ? auth()->user()->phone : '';
 
         
         <div class="mt-3">
-        <label for="store">Chọn cửa hàng gần bạn nhất</label>
+        <label for="store">Lựa chọn cửa hàng gần bạn nhất</label>
             <select name="store_id" class="form-control" required>
                 <option>Chọn cửa hàng *</option>
                 @foreach(DB::table('stores')->get() as $store)
