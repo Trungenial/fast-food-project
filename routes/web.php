@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\FooterController;
+use App\Http\Controllers\NoLoginController;
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
@@ -138,3 +139,17 @@ Route::get('/thong-tin/{slug}', [FooterController::class, 'show'])->name('footer
 require __DIR__.'/auth.php';
 
 Route::get('/policy','App\Http\Controllers\HomeControllers@policy');
+Route::get('nologin','App\Http\Controllers\NoLoginController@nologin')->name('nologin');
+
+// Route::get('/order', 'App\Http\Controllers\NoLoginController@order')->name('order');
+
+// Route::post('/cart/delete', 'App\Http\Controllers\NoLoginController@cartdelete')->name('cartdelete');
+
+// Route::post('/create-order', 'App\Http\Controllers\NoLoginController@create_order')->name('create-order');
+
+
+// Route::post('/my-orders', 'App\Http\Controllers\NoLoginController@myOrders')->name('myorders');
+
+Route::get('/dat-hang', [NoLoginController::class, 'nologin'])->name('nologin');
+Route::post('/dat-hang', [NoLoginController::class, 'create_order'])->name('create-order');
+Route::post('/xoa-san-pham', [NoLoginController::class, 'cartdelete'])->name('cartdelete');

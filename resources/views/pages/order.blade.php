@@ -60,10 +60,14 @@
                     @auth
                         <button type="submit" class="btn btn-success mt-3">🛍️ Đặt hàng</button>
                     @else
-                        <a href="{{ route('login') }}" class="btn btn-warning mt-3">Đăng nhập để đặt hàng</a>
+                        <a href="{{ route('login') }}" class="btn btn-warning mt-3">Đăng nhập để đặt hàng</a><br><br>
+                        <a href="{{ route('nologin') }}" class="btn btn-outline-warning">
+                        Đặt hàng không cần đăng nhập
+                    </a>
                     @endauth
                 </div>
             </div>
+
         </form>
     @endif
 </div>
