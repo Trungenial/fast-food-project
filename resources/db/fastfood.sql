@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 14, 2025 at 11:53 PM
+-- Generation Time: Apr 15, 2025 at 12:43 AM
 -- Server version: 9.1.0
 -- PHP Version: 8.3.14
 
@@ -1407,7 +1407,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `birthday` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
@@ -11509,6 +11509,14 @@ ALTER TABLE `categories`
   ADD CONSTRAINT `categories_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `categories` (`id`) ON DELETE SET NULL;
 
 --
+-- Constraints for table `districts`
+--
+ALTER TABLE `districts`
+  ADD CONSTRAINT `districts_ibfk_1` FOREIGN KEY (`province_code`) REFERENCES `provinces` (`code`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_district_administrative_region` FOREIGN KEY (`administrative_unit_id`) REFERENCES `administrative_units` (`id`),
+  ADD CONSTRAINT `fk_district_administrative_unit` FOREIGN KEY (`administrative_unit_id`) REFERENCES `administrative_units` (`id`);
+
+--
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
@@ -11541,11 +11549,25 @@ ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE;
 
 --
+-- Constraints for table `provinces`
+--
+ALTER TABLE `provinces`
+  ADD CONSTRAINT `fk_provinces_administrative_region` FOREIGN KEY (`administrative_region_id`) REFERENCES `administrative_regions` (`id`),
+  ADD CONSTRAINT `fk_provinces_administrative_unit` FOREIGN KEY (`administrative_unit_id`) REFERENCES `administrative_units` (`id`);
+
+--
 -- Constraints for table `reviews`
 --
 ALTER TABLE `reviews`
   ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `wards`
+--
+ALTER TABLE `wards`
+  ADD CONSTRAINT `fk_wards_administrative_unit` FOREIGN KEY (`administrative_unit_id`) REFERENCES `administrative_units` (`id`),
+  ADD CONSTRAINT `wards_ibfk_1` FOREIGN KEY (`district_code`) REFERENCES `districts` (`code`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
