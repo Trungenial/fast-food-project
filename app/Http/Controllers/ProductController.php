@@ -11,7 +11,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        $products = Product::with('category')->paginate(10); // mỗi trang 10 sản phẩm
         return view('products.index', compact('products'));
     }
 

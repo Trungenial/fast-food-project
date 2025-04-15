@@ -20,7 +20,7 @@
         </div>
 
         <!-- Main Content -->
-        <div class="flex-grow-1">
+        <div class="flex-grow-1" style="max-width: 90%">
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm sticky-top">
                 @include('layouts.admin.navbar')

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
@@ -118,6 +119,7 @@ Route::prefix('admin')->group(function () {
         Route::post('logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
         Route::resource('categories', CategoryController::class);
         Route::resource('products', ProductController::class);
+        Route::resource('orders', OrderController::class);
         Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
         Route::get('dashboard/revenue', [DashboardController::class, 'revenue'])->name('admin.dashboard.revenue');
         Route::get('dashboard/top-products', [DashboardController::class, 'topProducts'])->name('admin.dashboard.topProducts');

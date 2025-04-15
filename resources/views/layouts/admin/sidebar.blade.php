@@ -21,5 +21,11 @@
                 <i class="fas fa-box me-2"></i>Products
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link text-white {{ request()->routeIs('orders.*') ? 'bg-secondary rounded' : '' }}"
+                href="{{ route('orders.index') }}">
+                <i class="fas fa-shopping-cart me-2"></i>Orders
+            </a>
+        </li>
     </ul>
 </div>
