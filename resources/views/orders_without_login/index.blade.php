@@ -39,12 +39,12 @@
                             <a href="{{ route('orders_without_login.show', $order->id) }}"
                                 class="btn btn-info btn-sm">Xem</a>
                             <a href="{{ route('orders_without_login.edit', $order->id) }}"
-                                class="btn btn-warning btn-sm">Xóa</a>
+                                class="btn btn-warning btn-sm">Sửa</a>
                             <form action="{{ route('orders_without_login.destroy', $order->id) }}" method="POST"
                                 onsubmit="return confirm('Are you sure you want to delete this order?')">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Sửa</button>
+                                <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
                             </form>
                         </td>
                     </tr>
