@@ -19,6 +19,8 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\MenuControllers;
+use App\Http\Controllers\ServiceController;
+
 
 Route::get('/get-districts/{province}', [AddressController::class, 'getDistricts']);
 Route::get('/get-wards/{district}', [AddressController::class, 'getWards']);
@@ -35,9 +37,12 @@ Route::get('/khuyen-mai', function () {
     return view('pages.khuyen-mai');
 })->name('khuyen-mai');
 
-Route::get('/dich-vu-tiec', function () {
-    return view('pages.dich-vu-tiec');
-})->name('dich-vu-tiec');
+// Service routes
+Route::get('/dich-vu', [ServiceController::class, 'dichvu'])->name('dich-vu');
+Route::get('/dich-vu/dat-tiec-sinh-nhat', [ServiceController::class, 'birthday'])->name('dich-vu.birthday');
+Route::get('/dich-vu/jollibee-kid-club', [ServiceController::class, 'kidclub'])->name('dich-vu.kidclub');
+Route::get('/dich-vu/don-hang-lon', [ServiceController::class, 'order'])->name('dich-vu.order');
+
 
 Route::get('/nha-hang', function () {
     return view('pages.nha-hang');
@@ -128,13 +133,13 @@ Route::prefix('admin')->group(function () {
     });
 });
 
-Route::get('/menu','App\Http\Controllers\MenuControllers@menu');
+Route::get('/menu', 'App\Http\Controllers\MenuControllers@menu');
 
-Route::get('/menu','App\Http\Controllers\MenuControllers@index');
-Route::get('/menu/category/{id}','App\Http\Controllers\MenuControllers@category');
+Route::get('/menu', 'App\Http\Controllers\MenuControllers@index');
+Route::get('/menu/category/{id}', 'App\Http\Controllers\MenuControllers@category');
 
 Route::get('/thong-tin/{slug}', [FooterController::class, 'show'])->name('footer.show');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
-Route::get('/policy','App\Http\Controllers\HomeControllers@policy');
+Route::get('/policy', 'App\Http\Controllers\HomeControllers@policy');
