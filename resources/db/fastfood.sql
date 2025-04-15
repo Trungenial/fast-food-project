@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 15, 2025 at 04:57 AM
+-- Generation Time: Apr 15, 2025 at 06:37 AM
 -- Server version: 9.1.0
 -- PHP Version: 8.3.14
 
@@ -153,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `parent_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `parent_id` (`parent_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `categories`
@@ -167,7 +167,8 @@ INSERT INTO `categories` (`id`, `name`, `parent_id`) VALUES
 (5, 'Burger/Cơm', NULL),
 (6, 'Phần ăn phụ', NULL),
 (7, 'Món tráng miệng', NULL),
-(8, 'Thức uống', NULL);
+(8, 'Thức uống', NULL),
+(10, 'Gà nguyên con', 1);
 
 -- --------------------------------------------------------
 
@@ -1006,7 +1007,79 @@ INSERT INTO `orders` (`id`, `user_id`, `store_id`, `shipping_address`, `receiver
 (11, 11, 3, NULL, NULL, 1124000.00, 'processing', '2025-04-14 00:39:10', '2025-04-14 00:39:10'),
 (12, 11, 2, NULL, NULL, 1086000.00, 'processing', '2025-04-15 00:45:50', '2025-04-15 01:35:57'),
 (13, 12, 1, NULL, NULL, 392000.00, 'processing', '2025-04-16 00:51:30', '2025-04-15 01:36:02'),
-(14, 13, 4, 'Hồ Chí Minh', NULL, 712000.00, 'processing', '2025-04-17 01:33:30', '2025-04-14 21:53:53');
+(14, 13, 4, 'Hồ Chí Minh', NULL, 712000.00, 'completed', '2025-04-17 01:33:30', '2025-04-14 22:16:51');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders_without_login`
+--
+
+DROP TABLE IF EXISTS `orders_without_login`;
+CREATE TABLE IF NOT EXISTS `orders_without_login` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `note` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `delivery_method` enum('home','store') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `city` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `store_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `order_note` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `total_price` decimal(12,2) DEFAULT NULL,
+  `vat` decimal(12,2) DEFAULT '0.08',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `time_pickup` datetime DEFAULT NULL,
+  `status` enum('pending','paid','processing','completed','canceled') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `province` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `districts` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `wards` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `full_address` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `orders_without_login`
+--
+
+INSERT INTO `orders_without_login` (`id`, `first_name`, `last_name`, `phone`, `email`, `note`, `delivery_method`, `city`, `store_id`, `order_note`, `total_price`, `vat`, `created_at`, `time_pickup`, `status`, `province`, `districts`, `wards`, `full_address`) VALUES
+(1, 'Trần Gia Lộc', 'Trần', '0869016573', 'tgloc006@gmail.com', NULL, 'store', 'Hồ Chí Minh', 'Chọn cửa hàng *', NULL, 391000.00, 0.08, '2025-04-14 12:26:00', NULL, 'pending', NULL, NULL, NULL, NULL),
+(2, 'Trần Gia Lộc', 'Trần', '0869016573', 'tgloc006@gmail.com', NULL, 'store', 'Hồ Chí Minh', 'Chọn cửa hàng *', NULL, 391000.00, 0.08, '2025-04-14 12:27:15', NULL, 'pending', NULL, NULL, NULL, NULL),
+(3, 'bookdb', 'gialoc', '0869011444', 'tgloc004@gmail.com', 'asd', 'store', 'Hồ Chí Minh', '2', NULL, 157000.00, 0.08, '2025-04-14 19:45:14', '2025-04-15 13:48:00', 'pending', NULL, NULL, NULL, NULL),
+(4, 'LOOJC', 'loc', '0869011444', 'tgloc006@gmail.com', NULL, 'store', '79', '2', NULL, 316000.00, 0.08, '2025-04-14 19:48:46', '2025-04-15 13:48:00', 'pending', NULL, NULL, NULL, NULL),
+(5, 'LOOJC', 'loc', '0869011444', 'tgloc006@gmail.com', NULL, 'store', '79', 'Jollibee Vạn Hạnh Mall', NULL, 158000.00, 0.08, '2025-04-14 19:51:12', '2025-05-02 23:51:00', 'pending', NULL, NULL, NULL, NULL),
+(6, 'Loc', 'Tran Gia', '0869011234', 'tgloc006@gmail.com', NULL, 'store', 'Hồ Chí Minh', 'Jollibee Pasteur', NULL, 237000.00, 0.08, '2025-04-14 20:08:53', '2025-04-15 15:20:00', 'pending', NULL, NULL, NULL, NULL),
+(7, 'Lộc', 'Trần', '0339292282', 'tgf@gmail.com', 'First order', 'home', NULL, 'Chọn cửa hàng *', 'Extra', 79000.00, 0.08, '2025-04-15 02:30:02', '2025-04-26 16:27:00', 'paid', NULL, NULL, NULL, NULL),
+(8, 'Hoa', 'Trần', '0869016573', 'tgloc006@gmail.com', 'No note', 'home', NULL, 'Chọn cửa hàng *', 'Extra Sauce', 79000.00, 0.08, '2025-04-15 02:35:09', '2025-04-16 04:37:00', 'paid', NULL, NULL, NULL, NULL),
+(9, 'Lộc', 'Trần', '12345678', 'aloc@gamil.com', 'No', 'home', NULL, 'Chọn cửa hàng *', 'No', 79000.00, 0.08, '2025-04-15 02:37:56', '2025-04-25 16:40:00', 'paid', NULL, NULL, NULL, NULL),
+(10, 'Lộc', 'Nguyễn', '123132', 'tg06@gmail.com', 'YESSNOO', 'home', NULL, 'Chọn cửa hàng *', 'No', 145000.00, 0.08, '2025-04-15 02:40:19', '2025-04-15 16:41:00', 'paid', NULL, NULL, NULL, NULL),
+(11, 'Quang Lộc', 'Trần', '0123817323', 'SDHFJ@GMAIL.COM', 'sfđ', 'home', NULL, 'Chọn cửa hàng *', 'qưdsa', 78000.00, 0.08, '2025-04-15 02:41:54', '2025-04-15 16:41:00', 'pending', NULL, NULL, NULL, NULL),
+(12, 'Gia Lộc', 'Trần', '0869016573', 'tgloc006@gmail.com', 'No', 'home', NULL, 'Chọn cửa hàng *', 'Extra Salad', 398000.00, 0.08, '2025-04-15 02:43:53', '2025-04-16 16:43:00', 'paid', NULL, NULL, NULL, NULL),
+(13, 'Lộc', 'Trần', '0869016573', 'tgloc006@gmail.com', 'Lộc', 'home', NULL, 'Chọn cửa hàng *', 'Test', 78000.00, 0.08, '2025-04-15 02:46:37', '2025-04-13 16:46:00', 'paid', NULL, NULL, NULL, NULL),
+(14, 'Lộc', 'Trần', '0869016573', 'tgloc006@gmail.com', 'Tessst', 'home', NULL, 'Chọn cửa hàng *', 'test', 79000.00, 0.08, '2025-04-15 02:48:11', '2025-04-25 16:48:00', 'pending', NULL, NULL, NULL, NULL),
+(15, 'Trần Gia Lộc', 'Trần', '0869016573', 'tgloc006@gmail.com', 'TESTTHOI', 'home', NULL, 'Chọn cửa hàng *', 'NOO', 90000.00, 0.08, '2025-04-15 02:51:31', '2025-04-27 20:51:00', 'pending', NULL, NULL, NULL, NULL),
+(16, 'Trần Gia Lộc', 'Trần', '0869016573', 'tgloc006@gmail.com', 'qưe', 'home', NULL, 'Chọn cửa hàng *', 'qe', 312000.00, 0.08, '2025-04-15 02:52:23', '2025-04-12 20:52:00', 'pending', NULL, NULL, NULL, NULL),
+(17, 'Trần Gia Lộc', 'Trần', '0869016573', 'tgloc006@gmail.com', 'ád', 'home', NULL, 'Chọn cửa hàng *', NULL, 164000.00, 0.08, '2025-04-15 03:01:56', '2025-04-25 17:01:00', 'paid', NULL, NULL, NULL, NULL),
+(18, 'Trần Gia Lộc', 'Trần', '0869016573', 'tgloc006@gmail.com', 'dzxc', 'home', NULL, 'Chọn cửa hàng *', NULL, 79000.00, 0.08, '2025-04-15 03:05:27', '2025-04-27 17:05:00', 'paid', NULL, NULL, NULL, NULL),
+(19, 'Gia Lộc', 'Trần', '0857028474', 'tglockk@gmail.com', 'Hẹn lấy tại cửa hàng', 'store', NULL, 'Jollibee Vạn Hạnh Mall', 'Hẹn lấy tại cửa hàng', 79000.00, 0.08, '2025-04-15 03:17:36', '2025-04-26 20:16:00', 'paid', NULL, NULL, NULL, NULL),
+(20, 'Gia Lộc', 'Trần', '0827294747', 'gkfloc@gmail.com', 'Giao hàng tận nơi', 'home', NULL, NULL, 'Giao hàng tận nơi', 79000.00, 0.08, '2025-04-15 03:19:14', '2025-04-06 17:19:00', 'paid', NULL, NULL, NULL, 'Tề Lễ, Tam Nông, Phú Thọ'),
+(21, 'Gia Lộc', 'Trần', '1231231', 'test@gmail.com', 'Giao hàng tận nơi, lấy địa chỉ full', 'home', NULL, NULL, NULL, 948000.00, 0.08, '2025-04-15 03:29:06', '2025-04-27 22:28:00', 'paid', '24', '222', '07789', '132 Đường Dân Chủ, Tăng Tiến, Việt Yên, Bắc Giang'),
+(22, 'Trần Gia Lộc', 'Trần', '0869016573', 'tgloc006@gmail.com', 'Giao hàng tận nơi, lấy tên tỉnh', 'home', NULL, NULL, NULL, 1188000.00, 0.08, '2025-04-15 03:31:49', '2025-04-18 17:31:00', 'paid', '15', '135', '04339', '132 Đường Dân Chủ, Yên Thắng, Lục Yên, Yên Bái'),
+(23, 'Trần Gia Lộc', 'Trần', '0869016573', 'tgloc006@gmail.com', 'Giao hàng tận nơi, lấy tên province', 'home', NULL, NULL, NULL, 312000.00, 0.08, '2025-04-15 03:32:56', '2025-04-06 17:32:00', 'paid', NULL, NULL, NULL, 'Số 5, Nà Bó, Mai Sơn, Sơn La'),
+(24, 'Trần Gia Lộc', 'Trần', '0869016573', 'tgloc006@gmail.com', 'Giao hàng tận nơi', 'home', NULL, NULL, NULL, 79000.00, 0.08, '2025-04-15 03:38:54', '2025-04-19 21:38:00', 'paid', 'Phú Thọ', 'Lâm Thao', 'Cao Xá', '123 An Lạc, Cao Xá, Lâm Thao, Phú Thọ'),
+(25, 'ads', 'Trần', '0869016573', 'tgloc006@gmail.com', 'ads', 'store', NULL, 'Chọn cửa hàng *', 'ád', 79000.00, 0.08, '2025-04-15 03:42:06', '2025-04-19 17:45:00', 'paid', '', '', '', NULL),
+(26, 'Trần Gia Lộc', 'Trần', '0869016573', 'tgloc006@gmail.com', NULL, 'store', NULL, 'Chọn cửa hàng *', NULL, 79000.00, 0.08, '2025-04-15 03:43:33', '2025-04-18 17:47:00', 'paid', '', '', '', NULL),
+(27, 'Trần Gia Lộc', 'Trần', '0869016573', 'tgloc006@gmail.com', 'GiaLooc', 'home', NULL, NULL, NULL, 79000.00, 0.08, '2025-04-15 03:46:13', '2025-04-18 21:46:00', 'paid', 'Vĩnh Phúc', 'Bình Xuyên', 'Sơn Lôi', 'ăd, Sơn Lôi, Bình Xuyên, Vĩnh Phúc'),
+(28, 'Lộc', 'Trần', '123132', 'tgloc006@gmail.com', 'test gửi mail không đăng nhập', 'store', NULL, 'Chọn cửa hàng *', NULL, 158000.00, 0.08, '2025-04-15 04:26:46', '2025-04-16 18:26:00', 'pending', '', '', '', NULL),
+(29, 'Lộc', 'Trần', '123132', 'tgloc006@gmail.com', 'test gửi mail không đăng nhập', 'store', NULL, 'Chọn cửa hàng *', NULL, 158000.00, 0.08, '2025-04-15 04:35:58', '2025-04-16 18:26:00', 'pending', '', '', '', NULL),
+(30, 'Trần Gia Lộc', 'Trần', '0869016573', 'tgloc006@gmail.com', 'TEST GỬI MAIL', 'store', NULL, 'Jollibee Tô Hiến Thành', NULL, 237000.00, 0.08, '2025-04-15 04:36:50', '2025-04-20 18:39:00', 'paid', '', '', '', NULL),
+(31, 'Trần Gia Lộc', 'Trần', '0869016573', 'tgloc006@gmail.com', 'TEST GỬI MAIL', 'store', NULL, 'Jollibee Tô Hiến Thành', NULL, 237000.00, 0.08, '2025-04-15 04:41:18', '2025-04-20 18:39:00', 'paid', '', '', '', NULL),
+(32, 'Trần Gia Lộc', 'Trần', '0869016573', 'tgloc006@gmail.com', 'TEST GỬI MAIL', 'store', NULL, 'Jollibee Tô Hiến Thành', NULL, 237000.00, 0.08, '2025-04-15 04:42:56', '2025-04-20 18:39:00', 'paid', '', '', '', NULL),
+(33, 'Trần Gia Lộc', 'Trần', '0869016573', 'tgloc006@gmail.com', 'TEST GỬI MAIL', 'store', NULL, 'Jollibee Tô Hiến Thành', NULL, 237000.00, 0.08, '2025-04-15 04:44:54', '2025-04-20 18:39:00', 'paid', '', '', '', NULL),
+(34, 'Trần Gia Lộc', 'Trần', '0869016573', 'tgloc006@gmail.com', 'TEST GỬI MAIL', 'store', NULL, 'Jollibee Tô Hiến Thành', NULL, 237000.00, 0.08, '2025-04-15 04:46:13', '2025-04-20 18:39:00', 'paid', '', '', '', NULL),
+(35, 'Trần Gia Lộc', 'Trần', '0869016573', 'tgloc006@gmail.com', 'TEST GỬI MAIL', 'store', NULL, 'Jollibee Tô Hiến Thành', NULL, 237000.00, 0.08, '2025-04-15 04:47:10', '2025-04-20 18:39:00', 'paid', '', '', '', NULL),
+(36, 'Trần Gia Lộc', 'Trần', '0869016573', 'tgloc006@gmail.com', NULL, 'store', NULL, 'Chọn cửa hàng *', NULL, 79000.00, 0.08, '2025-04-15 04:49:06', '2025-04-20 18:49:00', 'paid', '', '', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -1352,7 +1425,7 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('dG5jaWkcurmkijHxbxXlyJ9AQM6wn0wpvHeIWkUw', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 Edg/135.0.0.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiM0FUSGFaNFF2aE9SekFEODA0WkdDSERoQlFHV3JVTjFTVE1EMDlTbiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDI6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9vcmRlcnMvMTQvZWRpdCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTI6ImxvZ2luX2FkbWluXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjQ6ImNhcnQiO2E6MTp7aTo1O2k6Mzt9fQ==', 1744692860);
+('dG5jaWkcurmkijHxbxXlyJ9AQM6wn0wpvHeIWkUw', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 Edg/135.0.0.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiM0FUSGFaNFF2aE9SekFEODA0WkdDSERoQlFHV3JVTjFTVE1EMDlTbiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDg6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9vcmRlcnMtd2l0aG91dC1sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTI6ImxvZ2luX2FkbWluXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjQ6ImNhcnQiO2E6MTp7aTo1O2k6Mzt9fQ==', 1744698980);
 
 -- --------------------------------------------------------
 
