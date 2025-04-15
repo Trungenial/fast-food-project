@@ -145,9 +145,8 @@ Route::get('/policy','App\Http\Controllers\HomeControllers@policy');
 
 Route::get('nologin','App\Http\Controllers\NoLoginController@nologin')->name('nologin');
 
-// Route::get('/dat-hang', [NoLoginController::class, 'nologin'])->name('nologin');
 Route::post('/dat-hang', [NoLoginController::class, 'create_order'])->name('create-order');
-// Route::post('/xoa-san-pham', [NoLoginController::class, 'cartdelete'])->name('cartdelete');
+
 
 Route::get('/testemail','App\Http\Controllers\MailController@testemail');
 
