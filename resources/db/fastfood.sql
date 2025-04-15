@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 15, 2025 at 07:54 AM
+-- Generation Time: Apr 15, 2025 at 08:54 AM
 -- Server version: 9.1.0
 -- PHP Version: 8.3.14
 
@@ -177,6 +177,30 @@ INSERT INTO `categories` (`id`, `name`, `parent_id`) VALUES
 (7, 'Món tráng miệng', NULL),
 (8, 'Thức uống', NULL),
 (10, 'Gà nguyên con', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer_messages`
+--
+
+DROP TABLE IF EXISTS `customer_messages`;
+CREATE TABLE IF NOT EXISTS `customer_messages` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `message` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `customer_messages`
+--
+
+INSERT INTO `customer_messages` (`id`, `name`, `phone`, `email`, `message`, `created_at`) VALUES
+(1, 'Trần Sỹ Trung', '67567567567', 'transytrung5.work@gmail.com', 'Một 2 3', '2025-04-15 01:53:37');
 
 -- --------------------------------------------------------
 
@@ -1004,7 +1028,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `orders_ibfk_2` (`store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `orders`
@@ -1015,7 +1039,9 @@ INSERT INTO `orders` (`id`, `user_id`, `store_id`, `shipping_address`, `receiver
 (11, 11, 3, NULL, NULL, 1124000.00, 'processing', '2025-02-14 00:39:10', '2025-04-15 07:53:03'),
 (12, 11, 2, NULL, NULL, 1086000.00, 'processing', '2025-03-15 00:45:50', '2025-04-15 07:52:57'),
 (13, 12, 1, NULL, NULL, 392000.00, 'processing', '2025-04-16 00:51:30', '2025-04-15 01:36:02'),
-(14, 13, 4, 'Hồ Chí Minh', NULL, 712000.00, 'completed', '2025-05-17 01:33:30', '2025-04-15 07:53:40');
+(14, 13, 4, 'Hồ Chí Minh', NULL, 712000.00, 'completed', '2025-05-17 01:33:30', '2025-04-15 07:53:40'),
+(21, 14, 1, 'Phương Linh Chiểu, Vĩnh Quỳnh, Thanh Trì, Hà Nội', '000000021212', 435000.00, 'processing', '2025-04-15 01:45:06', '2025-04-15 01:45:06'),
+(22, 14, 1, 'Phương Linh Chiểu, Vĩnh Quỳnh, Thanh Trì, Hà Nội', '000000021212', 435000.00, 'processing', '2025-04-15 01:47:04', '2025-04-15 01:47:04');
 
 -- --------------------------------------------------------
 
@@ -1105,7 +1131,7 @@ CREATE TABLE IF NOT EXISTS `order_items` (
   PRIMARY KEY (`id`),
   KEY `order_id` (`order_id`),
   KEY `product_id` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `order_items`
@@ -1125,7 +1151,9 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`, `price`) 
 (23, 13, 3, 2, 79000.00),
 (24, 13, 4, 3, 78000.00),
 (25, 14, 3, 4, 79000.00),
-(26, 14, 10, 4, 99000.00);
+(26, 14, 10, 4, 99000.00),
+(27, 21, 5, 3, 145000.00),
+(28, 22, 5, 3, 145000.00);
 
 -- --------------------------------------------------------
 
@@ -1164,7 +1192,7 @@ CREATE TABLE IF NOT EXISTS `payments` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `order_id` (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `payments`
@@ -1175,7 +1203,9 @@ INSERT INTO `payments` (`id`, `order_id`, `method`, `status`, `transaction_id`, 
 (3, 11, 'credit_card', 'pending', NULL, '2025-04-14 00:39:10'),
 (4, 12, 'cash', 'paid', NULL, '2025-04-14 00:45:50'),
 (5, 13, 'e_wallet', 'pending', NULL, '2025-04-14 00:51:30'),
-(6, 14, 'cash', 'paid', NULL, '2025-04-14 01:33:30');
+(6, 14, 'cash', 'paid', NULL, '2025-04-14 01:33:30'),
+(7, 21, 'e_wallet', 'pending', NULL, '2025-04-15 01:45:06'),
+(8, 22, 'e_wallet', 'pending', NULL, '2025-04-15 01:47:04');
 
 -- --------------------------------------------------------
 
@@ -1433,7 +1463,7 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('q8wUIC2I4xKpX3vGdoeiGXzS9pOqkppq2Un3lq5L', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 Edg/135.0.0.0', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiM0FUSGFaNFF2aE9SekFEODA0WkdDSERoQlFHV3JVTjFTVE1EMDlTbiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9kYXNoYm9hcmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUyOiJsb2dpbl9hZG1pbl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czo0OiJjYXJ0IjthOjE6e2k6NTtpOjM7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE0O30=', 1744703638);
+('q8wUIC2I4xKpX3vGdoeiGXzS9pOqkppq2Un3lq5L', 14, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 Edg/135.0.0.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiM0FUSGFaNFF2aE9SekFEODA0WkdDSERoQlFHV3JVTjFTVE1EMDlTbiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9ob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MjoibG9naW5fYWRtaW5fNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE0O30=', 1744707225);
 
 -- --------------------------------------------------------
 
