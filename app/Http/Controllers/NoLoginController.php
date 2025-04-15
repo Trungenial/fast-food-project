@@ -117,25 +117,25 @@ class NoLoginController extends Controller
 
         // Tạo chi tiết sản phẩm trong đơn hàng
         foreach ($products as $product) {
-            DB::table('order_items')->insert([
-                'order_id'   => $orderId,
+            DB::table('order_items_without_login')->insert([
+                'order_without_login_id'   => $orderId,
                 'product_id' => $product->id,
                 'quantity'   => $cart[$product->id],
                 'price'      => $product->price,
             ]);
         }
-        DB::table('payments')->insert([
-            'order_id' => $orderId,
+        DB::table('payments_without_login')->insert([
+            'order_without_login_id' => $orderId,
             'method' => $method,
             'status' => $method === 'cash' ? 'paid' : 'pending',
             'transaction_id' => null,
             'created_at' => now(),
         ]);
         $order = DB::table('orders_without_login')->where('id', $orderId)->first();
-        $items = DB::table('order_items')
-        ->join('products', 'order_items.product_id', '=', 'products.id')
-        ->where('order_id', $orderId)
-        ->select('products.name', 'order_items.quantity', 'order_items.price')
+        $items = DB::table('order_items_without_login')
+        ->join('products', 'order_items_without_login.product_id', '=', 'products.id')
+        ->where('order_without_login_id', $orderId)
+        ->select('products.name', 'order_items_without_login.quantity', 'order_items_without_login.price')
         ->get();
 
         Mail::to($request->input('email'))->send(new OrderPlacedMailNoLogin($order, $items));

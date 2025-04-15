@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 15, 2025 at 08:54 AM
+-- Generation Time: Apr 15, 2025 at 10:43 AM
 -- Server version: 9.1.0
 -- PHP Version: 8.3.14
 
@@ -1051,7 +1051,7 @@ INSERT INTO `orders` (`id`, `user_id`, `store_id`, `shipping_address`, `receiver
 
 DROP TABLE IF EXISTS `orders_without_login`;
 CREATE TABLE IF NOT EXISTS `orders_without_login` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `first_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1071,7 +1071,7 @@ CREATE TABLE IF NOT EXISTS `orders_without_login` (
   `wards` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `full_address` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `orders_without_login`
@@ -1113,7 +1113,11 @@ INSERT INTO `orders_without_login` (`id`, `first_name`, `last_name`, `phone`, `e
 (33, 'Trần Gia Lộc', 'Trần', '0869016573', 'tgloc006@gmail.com', 'TEST GỬI MAIL', 'store', NULL, 'Jollibee Tô Hiến Thành', NULL, 237000.00, 0.08, '2025-04-15 04:44:54', '2025-04-20 18:39:00', 'paid', '', '', '', NULL),
 (34, 'Trần Gia Lộc', 'Trần', '0869016573', 'tgloc006@gmail.com', 'TEST GỬI MAIL', 'store', NULL, 'Jollibee Tô Hiến Thành', NULL, 237000.00, 0.08, '2025-04-15 04:46:13', '2025-04-20 18:39:00', 'paid', '', '', '', NULL),
 (35, 'Trần Gia Lộc', 'Trần', '0869016573', 'tgloc006@gmail.com', 'TEST GỬI MAIL', 'store', NULL, 'Jollibee Tô Hiến Thành', NULL, 237000.00, 0.08, '2025-04-15 04:47:10', '2025-04-20 18:39:00', 'paid', '', '', '', NULL),
-(36, 'Trần Gia Lộc', 'Trần', '0869016573', 'tgloc006@gmail.com', NULL, 'store', NULL, 'Chọn cửa hàng *', NULL, 79000.00, 0.08, '2025-04-15 04:49:06', '2025-04-20 18:49:00', 'paid', '', '', '', NULL);
+(36, 'Trần Gia Lộc', 'Trần', '0869016573', 'tgloc006@gmail.com', NULL, 'store', NULL, 'Chọn cửa hàng *', NULL, 79000.00, 0.08, '2025-04-15 04:49:06', '2025-04-20 18:49:00', 'paid', '', '', '', NULL),
+(38, 'Tr', 'Tr', '3463456', 'admin@example.com', 'sdfsadf', 'store', NULL, 'Jollibee Vạn Hạnh Mall', 'sdfasdf', 597000.00, 0.08, '2025-04-15 03:15:18', '2025-04-17 17:15:00', 'paid', '', '', '', NULL),
+(39, 'Tr', 'Tr', '3463456', 'admin@example.com', 'sdfsadf', 'store', NULL, 'Jollibee Vạn Hạnh Mall', 'sdfasdf', 597000.00, 0.08, '2025-04-15 03:15:48', '2025-04-17 17:15:00', 'paid', '', '', '', NULL),
+(40, 'Tr', 'Tr', '3463456', 'admin@example.com', 'sdfsadf', 'store', NULL, 'Jollibee Vạn Hạnh Mall', 'sdfasdf', 597000.00, 0.08, '2025-04-15 03:20:34', '2025-04-17 17:15:00', 'paid', '', '', '', NULL),
+(41, 'Tr', 'Tr', '3463456', 'admin@example.com', 'sdfsadf', 'store', NULL, 'Jollibee Vạn Hạnh Mall', 'sdfasdf', 597000.00, 0.08, '2025-04-15 03:21:56', '2025-04-17 17:15:00', 'paid', '', '', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -1154,6 +1158,34 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`, `price`) 
 (26, 14, 10, 4, 99000.00),
 (27, 21, 5, 3, 145000.00),
 (28, 22, 5, 3, 145000.00);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_items_without_login`
+--
+
+DROP TABLE IF EXISTS `order_items_without_login`;
+CREATE TABLE IF NOT EXISTS `order_items_without_login` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `order_without_login_id` bigint UNSIGNED NOT NULL,
+  `product_id` int NOT NULL,
+  `quantity` int NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `order_without_login_id` (`order_without_login_id`),
+  KEY `product_id` (`product_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `order_items_without_login`
+--
+
+INSERT INTO `order_items_without_login` (`id`, `order_without_login_id`, `product_id`, `quantity`, `price`) VALUES
+(29, 38, 8, 3, 199000.00),
+(30, 39, 8, 3, 199000.00),
+(31, 40, 8, 3, 199000.00),
+(32, 41, 8, 3, 199000.00);
 
 -- --------------------------------------------------------
 
@@ -1206,6 +1238,32 @@ INSERT INTO `payments` (`id`, `order_id`, `method`, `status`, `transaction_id`, 
 (6, 14, 'cash', 'paid', NULL, '2025-04-14 01:33:30'),
 (7, 21, 'e_wallet', 'pending', NULL, '2025-04-15 01:45:06'),
 (8, 22, 'e_wallet', 'pending', NULL, '2025-04-15 01:47:04');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payments_without_login`
+--
+
+DROP TABLE IF EXISTS `payments_without_login`;
+CREATE TABLE IF NOT EXISTS `payments_without_login` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `order_without_login_id` bigint UNSIGNED NOT NULL,
+  `method` enum('cash','credit_card','e_wallet') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` enum('pending','paid','failed') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `transaction_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `order_without_login_id` (`order_without_login_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `payments_without_login`
+--
+
+INSERT INTO `payments_without_login` (`id`, `order_without_login_id`, `method`, `status`, `transaction_id`, `created_at`) VALUES
+(9, 40, 'cash', 'paid', NULL, '2025-04-15 03:20:34'),
+(10, 41, 'cash', 'paid', NULL, '2025-04-15 03:21:56');
 
 -- --------------------------------------------------------
 
@@ -1463,6 +1521,7 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+('M02QbV5HuFdxMNbXmg7wQeMB4sJvthyQsbZYWKME', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 Edg/135.0.0.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiTjdJSE5KMGl1YmRsdzJrRVdqbnpRY2RWWWJtZHVRZHpJS1ZyWWdhRyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9kYXNoYm9hcmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjM6InVybCI7YTowOnt9czo1MjoibG9naW5fYWRtaW5fNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO30=', 1744713601),
 ('q8wUIC2I4xKpX3vGdoeiGXzS9pOqkppq2Un3lq5L', 14, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 Edg/135.0.0.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiM0FUSGFaNFF2aE9SekFEODA0WkdDSERoQlFHV3JVTjFTVE1EMDlTbiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9ob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MjoibG9naW5fYWRtaW5fNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE0O30=', 1744707225);
 
 -- --------------------------------------------------------
@@ -11643,10 +11702,22 @@ ALTER TABLE `order_items`
   ADD CONSTRAINT `order_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
 
 --
+-- Constraints for table `order_items_without_login`
+--
+ALTER TABLE `order_items_without_login`
+  ADD CONSTRAINT `order_items_without_login_ibfk_1` FOREIGN KEY (`order_without_login_id`) REFERENCES `orders_without_login` (`id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `payments`
 --
 ALTER TABLE `payments`
   ADD CONSTRAINT `payments_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `payments_without_login`
+--
+ALTER TABLE `payments_without_login`
+  ADD CONSTRAINT `payments_without_login_ibfk_1` FOREIGN KEY (`order_without_login_id`) REFERENCES `orders_without_login` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `posts`

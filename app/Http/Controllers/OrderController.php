@@ -23,7 +23,8 @@ class OrderController extends Controller
                             ->orWhere('orders.total_price', 'like', "%$search%");
             })
             ->orderByDesc('orders.created_at')
-            ->paginate(10);
+            ->paginate(10)
+            ->appends(['search' => $search]); // Giữ lại search khi phân trang
     
         return view('orders.index', compact('orders', 'search'));
     }
