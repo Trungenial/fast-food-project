@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderPlacedMailNoLogin;
 class NoLoginController extends Controller
+
 {
     public function nologin(Request $request)
     {
@@ -128,12 +131,22 @@ class NoLoginController extends Controller
             'transaction_id' => null,
             'created_at' => now(),
         ]);
-        // Xoá giỏ hàng sau khi đặt
+        $order = DB::table('orders_without_login')->where('id', $orderId)->first();
+        $items = DB::table('order_items')
+        ->join('products', 'order_items.product_id', '=', 'products.id')
+        ->where('order_id', $orderId)
+        ->select('products.name', 'order_items.quantity', 'order_items.price')
+        ->get();
+
+    // Gửi email bằng Mail class mới
+        Mail::to($request->input('email'))->send(new OrderPlacedMailNoLogin($order, $items));
         if(session()->forget('cart')){
             $status = 'Đặt hàng thành công!';
 
             return redirect()->route('order')->with('status', 'Đặt hàng thành công!');
         }
     }
+
+    
 
 }
