@@ -95,7 +95,10 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/order', 'App\Http\Controllers\MenuControllers@order')->name('order');
 Route::post('/cart/add', 'App\Http\Controllers\MenuControllers@cartadd')->name('cartadd');
 Route::post('/cart/delete', 'App\Http\Controllers\MenuControllers@cartdelete')->name('cartdelete');
+Route::post('/cart/update', [MenuControllers::class, 'cartupdate'])->name('cartupdate');
+
 Route::post('/order/create', 'App\Http\Controllers\MenuControllers@ordercreate')
+
     ->middleware('auth')->name('ordercreate');
 
 
@@ -138,3 +141,4 @@ Route::get('/thong-tin/{slug}', [FooterController::class, 'show'])->name('footer
 require __DIR__.'/auth.php';
 
 Route::get('/policy','App\Http\Controllers\HomeControllers@policy');
+Route::get('/testemail','App\Http\Controllers\MailController@testemail');
