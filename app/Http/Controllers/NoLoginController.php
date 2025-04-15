@@ -142,7 +142,7 @@ class NoLoginController extends Controller
 
         session()->forget('cart');
         $status="Đặt hàng thành công!";
-        return redirect()->route('order')->with('status',$status);
+        return redirect()->route('order')->with('status', $status);
     }
 
     

@@ -219,6 +219,19 @@ $phoneVal = auth()->check() ? auth()->user()->phone : '';
                 value="{{ old('receiver_phone', $phoneVal) }}" required>
         </div>
 
+        
+        <div class="mt-3">
+        <label for="store">Chọn cửa hàng gần bạn nhất</label>
+            <select name="store_id" class="form-control" required>
+                <option>Chọn cửa hàng *</option>
+                @foreach(DB::table('stores')->get() as $store)
+                <option value="{{ $store->id}}"  {{ old('store_name') == $store->id ? 'selected' : '' }}>
+                    {{ $store->name }}
+                </option>
+                @endforeach
+            </select>
+        </div>
+
         <div class="row align-items-center mt-4">
             <div class="col-md-6">
                 <label for="method">Phương thức thanh toán</label>

@@ -74,8 +74,10 @@ class MenuControllers extends Controller
 
     $provinceCode = $user ? DB::table('provinces')->where('name', $user->province)->value('code') : null;
     $districtCode = $user ? DB::table('districts')->where('name', $user->district)->value('code') : null;
+    $stores = DB::table('stores')->get();
 
     $provinces = DB::table('provinces')->get();
+    
 
     $districts = $provinceCode
         ? DB::table('districts')->where('province_code', $provinceCode)->get()
@@ -115,7 +117,7 @@ class MenuControllers extends Controller
     return view('pages.order', compact(
         'items', 'total',
         'provinces', 'districts', 'wards',
-        'provinceCode', 'districtCode', 'user'
+        'provinceCode', 'districtCode', 'user',
     ));
 }
 
@@ -154,12 +156,13 @@ class MenuControllers extends Controller
         $wardCode     = $request->input('ward');
         $addressDetail = $request->input('address');
         $receiverPhone = $request->input('receiver_phone');
+        
 
         $provinceName = DB::table('provinces')->where('code', $provinceCode)->value('name');
         $districtName = DB::table('districts')->where('code', $districtCode)->value('name');
         $wardName     = DB::table('wards')->where('code', $wardCode)->value('name');
 
-
+        
         $fullAddress = trim("$addressDetail, $wardName, $districtName, $provinceName", ', ');
 
         $orderId = DB::table('orders')->insertGetId([
@@ -170,6 +173,7 @@ class MenuControllers extends Controller
             'receiver_phone'   => $receiverPhone,
             'created_at'       => now(),
             'updated_at'       => now(),
+            'store_id'         => $request->input('store_id'),
         ]);
 
         foreach ($products as $product) {

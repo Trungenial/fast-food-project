@@ -21,7 +21,6 @@ class OrderPlacedMailNoLogin extends Mailable
         $this->items = $items;
     }
 
- 
     public function build()
     {
         return $this->subject('Xác nhận đơn hàng #' . $this->order->id)
