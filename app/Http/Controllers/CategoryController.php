@@ -10,7 +10,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::whereNull('parent_id')->with('children')->get();
+        $categories = Category::whereNull('parent_id')->with('children')->paginate(10); // 10 mỗi trang
         return view('categories.index', compact('categories'));
     }
 
