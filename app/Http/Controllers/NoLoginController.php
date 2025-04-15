@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Storage;
 class NoLoginController extends Controller
 {
     public function nologin(Request $request)
@@ -14,7 +14,9 @@ class NoLoginController extends Controller
             return view('pages.nologin', ['items' => [], 'total' => 0]);
         }
 
-        $province = DB::table('provinces')->where('code', $request->province_code)->value('name');
+        $provinces = DB::table('provinces')->get();
+        $districts = DB::table('districts')->get();
+        $wards = DB::table('wards')->get();
 
         $productIds = array_keys($cart);
         $products = DB::table('products')->whereIn('id', $productIds)->get();
@@ -36,8 +38,7 @@ class NoLoginController extends Controller
                 'subtotal' => $subtotal,
             ];
         }
-
-        return view('pages.nologin', compact('items', 'total', 'province'));
+        return view('pages.nologin', compact('items', 'total', 'provinces', 'districts', 'wards'));
     }
 
     public function cartdelete(Request $request)
@@ -66,7 +67,29 @@ class NoLoginController extends Controller
             $quantity = $cart[$product->id] ?? 0;
             $total += $product->price * $quantity;
         }
+        // Lấy tên tỉnh, huyện, xã từ request
+            $provinceName = '';
+            $districtName = '';
+            $wardName = '';
 
+            // Kiểm tra nếu có giá trị được chọn
+            if ($request->filled('province')) {
+                $provinceName = DB::table('provinces')
+                    ->where('code', $request->input('province'))
+                    ->value('name');
+            }
+
+            if ($request->filled('district')) {
+                $districtName = DB::table('districts')
+                    ->where('code', $request->input('district'))
+                    ->value('name');
+            }
+
+            if ($request->filled('ward')) {
+                $wardName = DB::table('wards')
+                    ->where('code', $request->input('ward'))
+                    ->value('name');
+            }
         
         // Tạo đơn hàng
         $orderId = DB::table('orders_without_login')->insertGetId([
@@ -82,6 +105,10 @@ class NoLoginController extends Controller
             'time_pickup'     => $request->input('time_pickup'),
             'total_price'     => $total,
             'status' => $method === 'cash' ? 'paid' : 'pending',
+            'province'        => $provinceName, 
+            'districts'       => $districtName, 
+            'wards'           => $wardName,     
+            'full_address'    => $request->input('full_address'),
             'created_at'      => now(),
         ]);
 
@@ -94,11 +121,19 @@ class NoLoginController extends Controller
                 'price'      => $product->price,
             ]);
         }
-
+        DB::table('payments')->insert([
+            'order_id' => $orderId,
+            'method' => $method,
+            'status' => $method === 'cash' ? 'paid' : 'pending',
+            'transaction_id' => null,
+            'created_at' => now(),
+        ]);
         // Xoá giỏ hàng sau khi đặt
-        session()->forget('cart');
+        if(session()->forget('cart')){
+            $status = 'Đặt hàng thành công!';
 
-        return back()->with('status', 'Đặt hàng thành công!');
+            return redirect()->route('order')->with('status', 'Đặt hàng thành công!');
+        }
     }
 
 }

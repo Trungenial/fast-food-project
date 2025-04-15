@@ -63,7 +63,7 @@ Route::get('/store', 'App\Http\Controllers\StoreControllers@store');
 Route::resource('categories', CategoryController::class);
 Route::resource('products', ProductController::class);
 
-Route::get('/menu', 'App\Http\Controllers\MenuControllers@menu');
+Route::get('/menu', 'App\Http\Controllers\MenuControllers@menu')->name('menu');
 
 Route::get('/menu', 'App\Http\Controllers\MenuControllers@index');
 Route::get('/menu/category/{id}', 'App\Http\Controllers\MenuControllers@category');
@@ -141,15 +141,6 @@ require __DIR__.'/auth.php';
 Route::get('/policy','App\Http\Controllers\HomeControllers@policy');
 Route::get('nologin','App\Http\Controllers\NoLoginController@nologin')->name('nologin');
 
-// Route::get('/order', 'App\Http\Controllers\NoLoginController@order')->name('order');
-
-// Route::post('/cart/delete', 'App\Http\Controllers\NoLoginController@cartdelete')->name('cartdelete');
-
-// Route::post('/create-order', 'App\Http\Controllers\NoLoginController@create_order')->name('create-order');
-
-
-// Route::post('/my-orders', 'App\Http\Controllers\NoLoginController@myOrders')->name('myorders');
-
-Route::get('/dat-hang', [NoLoginController::class, 'nologin'])->name('nologin');
+// Route::get('/dat-hang', [NoLoginController::class, 'nologin'])->name('nologin');
 Route::post('/dat-hang', [NoLoginController::class, 'create_order'])->name('create-order');
-Route::post('/xoa-san-pham', [NoLoginController::class, 'cartdelete'])->name('cartdelete');
+// Route::post('/xoa-san-pham', [NoLoginController::class, 'cartdelete'])->name('cartdelete');

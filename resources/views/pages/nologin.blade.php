@@ -50,7 +50,18 @@ $phoneVal = auth()->check() ? auth()->user()->phone : '';
 .form-section h2 {
     font-size: 18px;
     margin-bottom: 12px;
-    color: #333;
+    color: red;
+}
+.order-summary h2 {
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: red;
+}
+
+.form-group h2{
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: red;
 }
 
 .form-group {
@@ -156,7 +167,6 @@ textarea {
 
 @section('title', 'Thanh toán')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
 
 
 @section('content')
@@ -181,24 +191,12 @@ textarea {
                     <textarea name="note" placeholder="Ghi chú"></textarea>
                 </div>
             </div>
-
-            <!-- Phương thức vận chuyển -->
             <div class="form-section">
                 <h2>Phương thức vận chuyển</h2>
-                <label><input type="radio" name="delivery" value="home" checked> Giao hàng tận nơi</label><br>
-                <label><input type="radio" name="delivery" value="store"> Hẹn lấy tại cửa hàng</label>
-        
-                <div class="form-group">
-                    <select name="city">
-                        
-                    <option>Hồ Chí Minh</option>
-                        @foreach(DB::table('provinces')->get() as $province)
-                        <option value="{{ $province->code }}" {{ old('province_code') == $province->code ? 'selected' : '' }}>
-                            {{ $province->name }}
-                        </option> 
-                        @endforeach
-                    </select>
-                </div>
+                <label><input type="radio" name="delivery" value="store" checked> Hẹn lấy tại cửa hàng</label><hr>
+                <label><input type="radio" name="delivery" value="home" > Giao hàng tận nơi</label>
+                
+
             </div>
             <div class="form-group full" id="store_pickup">
                 <select name="store">
@@ -211,17 +209,32 @@ textarea {
                 </select>
             </div>
             <div class="form-group full"  id="home_delivery">
-                <input type="text" name="home_address" placeholder="Địa chỉ nhận hàng *" required>
-                <div style="margin-top: 10px;">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18..."
-                        width="100%"
-                        height="300"
-                        style="border:0;"
-                        allowfullscreen=""
-                        loading="lazy">
-                    </iframe>
-                </div>
+                <select name="province" id="province" required> 
+                    <option>Chọn tỉnh thành</option>
+                    @foreach($provinces as $province)
+                    <option value="{{ $province->code }}" {{ $provinceVal == $province->name ? 'selected' : '' }}>
+                        {{ $province->name }}
+                    </option>
+                    @endforeach
+                </select>
+                <select name="district" id="district" required> 
+                    <option>Chọn Quận/Huyện</option>
+                    @foreach($districts as $district)
+                    <option value="{{ $district->code }}" {{ $districtVal == $district->name ? 'selected' : '' }}>
+                        {{ $district->name }}
+                    </option>
+                    @endforeach
+                </select>
+                <select name="ward" id="ward" required> 
+                    <option>Chọn Phường/Xã</option>
+                    @foreach($wards as $ward)
+                    <option value="{{ $ward->code }}" {{ $wardVal == $ward->name ? 'selected' : '' }}>
+                        {{ $ward->name }}
+                    </option>
+                    @endforeach
+                </select>
+                <input type="text" name="home_address" placeholder="Địa chỉ nhận hàng cụ thể*" required>
+                <input type="hidden" name="full_address" id="full_address">
             </div>
             <div class="form-group full">
                     <label>Chọn khung giờ lấy hàng</label>
@@ -277,29 +290,93 @@ textarea {
 </div>
 <script>
 $(document).ready(function(){
-    $('input[name="delivery"]').on('change', function(){
-        if ($(this).val() === 'home') {
-            $('#home_delivery').show();
-            $('#store_pickup').hide();
-        }
-        else{
-            $('#store_pickup').show();
-            $('#home_delivery').hide();
-        }
-    });    
-});
-</script>
+    function toggleDeliveryFields() {
+        const isHome = $('input[name="delivery"]:checked').val() === 'home';
 
-<script>
-    function initAutocomplete() {
-        const input = document.getElementById('autocomplete');
-        const autocomplete = new google.maps.places.Autocomplete(input, {
-            types: ['geocode'],
-            componentRestrictions: { country: "vn" }
+        $('#home_delivery').toggle(isHome);
+        $('#store_pickup').toggle(!isHome);
+
+        // Vô hiệu hóa/khôi phục các field tương ứng
+        $('#home_delivery select, #home_delivery input').each(function() {
+            $(this).prop('disabled', !isHome);
+            $(this).prop('required', isHome);
+        });
+
+        $('#store_pickup select').each(function() {
+            $(this).prop('disabled', isHome);
+            $(this).prop('required', !isHome);
         });
     }
 
-    google.maps.event.addDomListener(window, 'load', initAutocomplete);
+    toggleDeliveryFields(); // Gọi khi trang load
+    $('input[name="delivery"]').on('change', toggleDeliveryFields);
+});
+
 </script>
 
 @endsection
+
+@push('scripts')
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const province = document.getElementById('province');
+        const district = document.getElementById('district');
+        const ward = document.getElementById('ward');
+        const fullAddress = document.getElementById('full_address');
+
+        function getSelectedText(select) {
+            return select.options[select.selectedIndex]?.text || '';
+        }
+
+        function updateFullAddress() {
+            const p = getSelectedText(province);
+            const d = getSelectedText(district);
+            const w = getSelectedText(ward);
+            const homeAddress = document.querySelector('input[name="home_address"]')?.value || '';
+
+            const parts = [homeAddress, w, d, p].filter(Boolean); // cụ thể + phường + huyện + tỉnh
+            fullAddress.value = parts.join(', ');
+        }
+
+
+
+        province.addEventListener('change', function() {
+            const code = this.value;
+            district.innerHTML = '<option value="">-- Chọn Huyện --</option>';
+            ward.innerHTML = '<option value="">-- Chọn Phường --</option>';
+            updateFullAddress();
+
+            if (code) {
+                fetch(`/get-districts/${code}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        data.forEach(d => {
+                            district.innerHTML += `<option value="${d.code}">${d.name}</option>`;
+                        });
+                    });
+            }
+        });
+
+        district.addEventListener('change', function() {
+            const code = this.value;
+            ward.innerHTML = '<option value="">-- Chọn Phường --</option>';
+            updateFullAddress();
+
+            if (code) {
+                fetch(`/get-wards/${code}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        data.forEach(w => {
+                            ward.innerHTML += `<option value="${w.code}">${w.name}</option>`;
+                        });
+                    });
+            }
+        });
+
+        ward.addEventListener('change', updateFullAddress);
+        document.querySelector('input[name="home_address"]').addEventListener('input', updateFullAddress);
+
+    });
+</script>
+@endpush
+
