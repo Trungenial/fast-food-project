@@ -3,6 +3,15 @@
 @section('content')
     <div class="container">
         <h1>Orders Without Login</h1>
+        <!-- Form tìm kiếm -->
+
+        <form method="GET" action="{{ route('orders_without_login.index') }}" class="mb-3">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" value="{{ request()->search }}"
+                    placeholder="Tìm kiếm theo tên, trạng thái, số điện thoại, email...">
+                <button class="btn btn-primary" type="submit">Tìm kiếm</button>
+            </div>
+        </form>
         <table class="table table-bordered table-striped">
             <thead class="table-dark text-center">
                 <tr>
@@ -27,7 +36,8 @@
                         <td>{{ number_format($order->total_price, 0, ',', '.') }} VND</td>
                         <td>{{ $order->created_at }}</td>
                         <td class="d-flex gap-1">
-                            <a href="{{ route('orders_without_login.show', $order->id) }}" class="btn btn-info btn-sm">Xem</a>
+                            <a href="{{ route('orders_without_login.show', $order->id) }}"
+                                class="btn btn-info btn-sm">Xem</a>
                             <a href="{{ route('orders_without_login.edit', $order->id) }}"
                                 class="btn btn-warning btn-sm">Xóa</a>
                             <form action="{{ route('orders_without_login.destroy', $order->id) }}" method="POST"

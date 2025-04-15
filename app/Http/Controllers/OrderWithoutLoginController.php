@@ -7,10 +7,24 @@ use Illuminate\Support\Facades\DB;
 
 class OrderWithoutLoginController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $orders = DB::table('orders_without_login')->orderBy('created_at', 'desc')->paginate(10);
-        return view('orders_without_login.index', compact('orders'));
+        $search = $request->input('search');
+    
+        $orders = DB::table('orders_without_login')
+            ->when($search, function ($query, $search) {
+                return $query->where('first_name', 'like', "%$search%")
+                            ->orWhere('last_name', 'like', "%$search%")
+                            ->orWhere('email', 'like', "%$search%")
+                            ->orWhere('phone', 'like', "%$search%")
+                            ->orWhere('id', 'like', "%$search%")
+                            ->orWhere('status', 'like', "%$search%");
+        })
+            ->orderBy('created_at', 'desc')
+            ->paginate(10)
+            ->appends(['search' => $search]); // Giữ lại search khi phân trang
+    
+        return view('orders_without_login.index', compact('orders', 'search'));
     }
 
     public function show($id)

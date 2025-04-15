@@ -4,6 +4,14 @@
     <div class="container">
         <h2 class="mb-4">Danh sách đơn đặt hàng</h2>
 
+        <form method="GET" action="{{ route('orders.index') }}" class="mb-3">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" value="{{ request()->search }}"
+                    placeholder="Tìm kiếm theo tên, trạng thái, số điện thoại, email...">
+                <button class="btn btn-primary" type="submit">Tìm kiếm</button>
+            </div>
+        </form>
+
         <table class="table table-bordered table-striped">
             <thead class="table-dark text-center">
                 <tr>
@@ -12,6 +20,7 @@
                     <th>Tổng tiền</th>
                     <th>Trạng thái</th>
                     <th>Ngày tạo</th>
+                    <th>Số điện thoại</th> <!-- Thêm cột Số điện thoại -->
                     <th>Hành động</th>
                 </tr>
             </thead>
@@ -34,6 +43,8 @@
                             @endif
                         </td>
                         <td>{{ $order->created_at }}</td>
+                        <td>{{ $order->phone ?? 'Không có số điện thoại' }}</td>
+                        <!-- Sử dụng fallback nếu không có số điện thoại -->
                         <td>
                             <a href="{{ route('orders.show', $order->id) }}" class="btn btn-sm btn-info">Xem</a>
                             <a href="{{ route('orders.edit', $order->id) }}" class="btn btn-sm btn-warning">Sửa</a>

@@ -7,17 +7,27 @@ use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        // Lấy giá trị tìm kiếm từ request
+        $search = $request->input('search');
+    
         // Join bảng orders với bảng users để lấy tên người đặt
         $orders = DB::table('orders')
             ->join('users', 'orders.user_id', '=', 'users.id')
             ->select('orders.*', 'users.name as user_name')
+            ->when($search, function ($query, $search) {
+                return $query->where('users.name', 'like', "%$search%")
+                            ->orWhere('orders.id', 'like', "%$search%")
+                            ->orWhere('orders.status', 'like', "%$search%")
+                            ->orWhere('orders.total_price', 'like', "%$search%");
+            })
             ->orderByDesc('orders.created_at')
             ->paginate(10);
-
-        return view('orders.index', compact('orders'));
+    
+        return view('orders.index', compact('orders', 'search'));
     }
+    
 
     public function create()
     {
